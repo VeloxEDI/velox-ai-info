@@ -1,0 +1,8 @@
+{
+  "label": "Maps",
+  "position": 10,
+  "link": {
+    "type": "generated-index",
+    "description": "Configure Map sources, targets, expressions and runtime behaviour."
+  }
+}

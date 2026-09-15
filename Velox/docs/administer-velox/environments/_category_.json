@@ -1,0 +1,8 @@
+{
+  "label": "Environments",
+  "position": 10,
+  "link": {
+    "type": "generated-index",
+    "description": "Configure and validate production and test environments."
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "label": "Plan an installation",
+  "position": 10,
+  "link": {
+    "type": "generated-index",
+    "description": "Plan prerequisites, accounts, ports and storage."
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "label": "Triggers and invocation",
+  "position": 60,
+  "link": {
+    "type": "generated-index",
+    "description": "Run Velox Flows manually, on schedules, from files, by REST or from other Flows."
+  }
+}

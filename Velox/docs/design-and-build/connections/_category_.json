@@ -1,0 +1,8 @@
+{
+  "label": "Connections",
+  "position": 10,
+  "link": {
+    "type": "generated-index",
+    "description": "Configure reusable database and file connectivity."
+  }
+}

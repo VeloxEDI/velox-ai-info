@@ -1,0 +1,8 @@
+{
+  "label": "Reports",
+  "position": 20,
+  "link": {
+    "type": "generated-index",
+    "description": "Configure Report data, layout, output and runtime behaviour."
+  }
+}

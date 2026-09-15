@@ -1,0 +1,8 @@
+{
+  "label": "Modules and folders",
+  "position": 40,
+  "link": {
+    "type": "generated-index",
+    "description": "Organise and manage reusable Velox modules."
+  }
+}

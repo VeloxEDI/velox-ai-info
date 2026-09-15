@@ -1,0 +1,8 @@
+{
+  "label": "General Setup",
+  "position": 20,
+  "link": {
+    "type": "generated-index",
+    "description": "Configure system-wide runtime, email, network, API and logging settings."
+  }
+}

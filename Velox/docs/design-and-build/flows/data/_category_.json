@@ -1,0 +1,8 @@
+{
+  "label": "Flow data",
+  "position": 40,
+  "link": {
+    "type": "generated-index",
+    "description": "Configure database and file Flow data items."
+  }
+}

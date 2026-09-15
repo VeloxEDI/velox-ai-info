@@ -1,0 +1,8 @@
+{
+  "label": "Message queues",
+  "position": 60,
+  "link": {
+    "type": "generated-index",
+    "description": "Configure MSMQ and IBM MQ input/output."
+  }
+}

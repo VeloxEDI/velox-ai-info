@@ -1,0 +1,8 @@
+{
+  "label": "Promote and govern configuration",
+  "position": 50,
+  "link": {
+    "type": "generated-index",
+    "description": "Export, validate, compare, promote and recover configuration."
+  }
+}

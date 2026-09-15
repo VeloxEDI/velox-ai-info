@@ -1,0 +1,8 @@
+{
+  "label": "Design and build integrations",
+  "position": 40,
+  "link": {
+    "type": "generated-index",
+    "description": "Design complete Velox integrations from Connections through operation."
+  }
+}

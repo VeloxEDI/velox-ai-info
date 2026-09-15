@@ -1,0 +1,8 @@
+{
+  "label": "Velox Scripting and Code Library",
+  "position": 70,
+  "link": {
+    "type": "generated-index",
+    "description": "Write, test and reference Velox PascalScript."
+  }
+}

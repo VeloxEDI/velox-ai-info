@@ -1,0 +1,8 @@
+{
+  "label": "Install Velox",
+  "position": 20,
+  "link": {
+    "type": "generated-index",
+    "description": "Install, configure and verify Velox services and databases."
+  }
+}
