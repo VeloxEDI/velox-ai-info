@@ -5,6 +5,8 @@ sidebar_position: 3
 classification: public
 status: review-required
 owner: Cam Hart
+last_updated_by: Kevin Tobias
+last_updated: "2026-11-16T23:15:15Z"
 keywords:
   - velox
   - scripting
@@ -21,17 +23,21 @@ function ExecCmdLineAndWait(const CmdLine: string): DWORD;
 
 ### Example
 ```Delphi
-procedure ScriptEvent(var Value: variant);
+procedure ScriptEvent(var Value: Variant);
 var
   ExitCode: DWORD;
 begin
   ExitCode := ExecCmdLineAndWait('"C:\Tools\Validator.exe" "C:\Data\orders.json"');
-
   if ExitCode = 83569 then
-    raise Exception.Create('Windows could not create the validator process');
+  begin
+    LogError('Windows could not start the validator process.');
+    Exit;
+  end;
   if ExitCode <> 0 then
-    raise Exception.Create('Validator exit code: ' + IntToStr(ExitCode));
-
+  begin
+    LogError('Validator exit code: ' + IntToStr(ExitCode));
+    Exit;
+  end;
   Value := 'Validated';
 end;
 ```

@@ -5,6 +5,8 @@ sidebar_position: 2
 classification: public
 status: review-required
 owner: Cam Hart
+last_updated_by: Kevin Tobias
+last_updated: "2026-11-16T23:15:15Z"
 keywords:
   - velox
   - scripting
@@ -20,11 +22,13 @@ function ExecCmdLine(const CmdLine: string): Boolean;
 
 ### Example
 ```Delphi
-procedure ScriptEvent(var Value: variant);
+procedure ScriptEvent(var Value: Variant);
 begin
   if not ExecCmdLine('"C:\Tools\Importer.exe" --input "C:\Data\orders.json"') then
-    raise Exception.Create('Windows could not create the importer process');
-
+  begin
+    LogError('Windows could not create the importer process.');
+    Exit;
+  end;
   Value := 'Importer started';
 end;
 ```

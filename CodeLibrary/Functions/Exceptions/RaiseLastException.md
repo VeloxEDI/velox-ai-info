@@ -5,6 +5,8 @@ sidebar_position: 7
 classification: public
 status: review-required
 owner: Cam Hart
+last_updated_by: Kevin Tobias
+last_updated: "2026-11-16T23:15:15Z"
 keywords:
   - velox
   - scripting
@@ -18,7 +20,9 @@ procedure RaiseLastException;
 ```
 
 ### Example
-```Delphi
+**Exception API reference only — not a recommended generated-script failure pattern.** These APIs remain documented accurately. Generated Velox scripts must use [LogError with explicit stop/propagation](../../../instructions/scripts/failure-handling.md).
+
+```Delphi velox-role="api-reference" reason="Demonstrates exception API semantics; not a generated-script recommendation"
 procedure ScriptEvent(var Value: Variant);
 begin
   try
@@ -35,6 +39,8 @@ end;
 ```
 
 ### Usage
+
+This page documents an existing exception API. Do not generate rethrow-based failure handling; use `LogError`, preserve cleanup explicitly, and stop/propagate failure according to the [mandatory standard](../../../instructions/scripts/failure-handling.md).
 
 `RaiseLastException` re-raises the saved exception from the active Velox scripting exception handler when available.
 

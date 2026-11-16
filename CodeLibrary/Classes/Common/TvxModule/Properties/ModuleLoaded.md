@@ -5,6 +5,8 @@ sidebar_position: 9
 classification: public
 status: review-required
 owner: Cam Hart
+last_updated_by: Kevin Tobias
+last_updated: "2026-11-16T23:15:15Z"
 keywords: [velox, scripting, hidden-ancestor, module, loaded, lifecycle, internal-state]
 ---
 
@@ -15,12 +17,24 @@ property ModuleLoaded: Boolean read write;
 ### Example
 
 ```Delphi
-procedure RequireLoadedModule(const Module: TvxDBCon);
+function RequireLoadedModule(const Data: TvxDBCon): Boolean;
 begin
-  if not Module.ModuleLoaded then
-    raise Exception.Create('The module has not completed its native load');
+  Result := False;
+  if Data = nil then
+  begin
+    LogError('No module is available.');
+    Exit;
+  end;
+  if not Data.ModuleLoaded then
+  begin
+    LogError('The module has not completed its native load.');
+    Exit;
+  end;
+  Result := True;
 end;
 ```
+
+This helper returns `False` after logging failure. The calling event must check the result and `Exit` before doing further work; an `Exit` inside the helper does not exit its caller. Follow [mandatory script failure handling](../../../../../instructions/scripts/failure-handling.md).
 
 ### Usage
 

@@ -5,6 +5,8 @@ sidebar_position: 4
 classification: public
 status: review-required
 owner: Cam Hart
+last_updated_by: Kevin Tobias
+last_updated: "2026-11-16T23:15:15Z"
 keywords:
   - velox
   - scripting
@@ -20,12 +22,14 @@ function ExecShellCmd(const aCommand, aParams: string): boolean;
 
 ### Example
 ```Delphi
-procedure ScriptEvent(var Value: variant);
+procedure ScriptEvent(var Value: Variant);
 begin
-  if ExecShellCmd('C:\Data\summary.pdf', '') then
-    Value := 'Windows accepted the open request'
-  else
-    raise Exception.Create('Windows could not open the summary');
+  if not ExecShellCmd('C:\Data\summary.pdf', '') then
+  begin
+    LogError('Windows could not open the summary.');
+    Exit;
+  end;
+  Value := 'Windows accepted the open request';
 end;
 ```
 

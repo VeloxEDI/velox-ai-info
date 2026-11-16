@@ -5,6 +5,8 @@ sidebar_position: 70
 classification: public
 status: review-required
 owner: Cam Hart
+last_updated_by: Kevin Tobias
+last_updated: "2026-11-16T23:15:15Z"
 keywords:
   - velox
   - scripting
@@ -25,10 +27,13 @@ begin
   try
     InvalidDayOfWeekInMonthError(2026, 2, 6, 1);
   except
-    Value := 'Invalid date fields were rejected';
+    LogError('Operation failed: ' + ExceptionToString(ExceptionType, ExceptionParam));
+    Exit;
   end;
 end;
 ```
+
+Follow [mandatory script failure handling](../../../instructions/scripts/failure-handling.md): a caught failure is not a successful Boolean/message result; log it as an error and stop.
 
 ### Usage
 

@@ -5,6 +5,8 @@ sidebar_position: 2
 classification: public
 status: review-required
 owner: Cam Hart
+last_updated_by: Kevin Tobias
+last_updated: "2026-11-16T23:15:15Z"
 keywords: [velox, scripting, constant, variant, unassigned, empty, clear]
 ---
 
@@ -15,13 +17,20 @@ function Unassigned: Variant;
 ### Example
 
 ```Delphi
-procedure ClearCandidate(var Candidate: Variant);
+function ClearCandidate(var Candidate: Variant): Boolean;
 begin
+  Result := False;
   Candidate := Unassigned;
   if not VarIsEmpty(Candidate) then
-    raise Exception.Create('Variant did not clear');
+  begin
+    LogError('Variant did not clear.');
+    Exit;
+  end;
+  Result := True;
 end;
 ```
+
+This helper returns `False` after logging failure. The calling event must check the result and `Exit` before doing further work; an `Exit` inside the helper does not exit its caller. Follow [mandatory script failure handling](../../../instructions/scripts/failure-handling.md).
 
 ### Usage
 

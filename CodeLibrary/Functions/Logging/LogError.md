@@ -1,10 +1,12 @@
 ---
 title: "LogError"
-description: "Adds a user error with the current script to the flow log and changes flow status so normal processing stops."
+description: "Marks the Process as failed with a user error; the current script must explicitly exit or propagate failure."
 sidebar_position: 6
 classification: public
 status: review-required
 owner: Cam Hart
+last_updated_by: Kevin Tobias
+last_updated: "2026-11-16T23:15:15Z"
 keywords:
   - velox
   - scripting
@@ -22,7 +24,7 @@ procedure LogError(const aMesg: string);
 ```Delphi
 procedure ScriptEvent(var Value: variant);
 begin
-  if Value = null then
+  if VarIsNull(Value) then
   begin
     LogError('A required source value is null.');
     Exit; // Prevent later statements in this procedure from running.
@@ -32,7 +34,11 @@ end;
 
 ### Usage
 
-`LogError` adds a user error with the current script to the flow log and changes flow status so normal processing stops.
+`LogError` adds a user error with the current script to the Process (Flow) log and marks processing failed. It does not throw an exception or exit the current script. Use `Exit` to prevent later statements in that procedure from running.
+
+Always use this function to report a script failure. Do not generate `raise`, `Exception.Create`, `RaiseException` or `RaiseLastException` as an alternative. Follow [mandatory failure handling](../../../instructions/scripts/failure-handling.md). A validation helper must also propagate failure, for example by returning `False`, and the calling event must check that result and exit.
+
+Retain supported `try..except` handling for unexpected failures, report them with `LogError`, preserve necessary cleanup and stop execution. `LogError` does not activate an existing `except` block. `LogWarning`, `LogIssue`, `LogDuplicate` and cancellation are not substitutes when processing must fail.
 
 **Parameters**
 
@@ -43,7 +49,7 @@ end;
 ### Additional Technical Info
 `LogError` adds a user Error item to the current flow log, attaches a copy of the current script to that item, and changes the overall flow state to Error. Error makes the log's Boolean `Status` false, so the action engine stops normal step processing after the current script call returns.
 
-The procedure does not raise an exception or automatically exit the current script procedure. Use `Exit` when later statements in that same procedure must not execute. The example is fictional and source-reviewed only.
+The procedure does not raise an exception or automatically exit the current script procedure. Use `Exit` when later statements in that same procedure must not execute. The example is fictional; this documentation update did not compile or execute it in Velox.
 
 **Implementation trace**
 
@@ -68,7 +74,7 @@ In that case a modal error dialog can block until a user responds. Designer/log-
 
 **Flow, transaction and retry effects**
 
-Once Error is set, lower status calls cannot reduce it. The outer action loop stops, configured database finalization normally rolls transactions back, failed source files can follow error handling, and deferred invoice issues are not saved. Auto-retry configuration can later reset status for a new attempt; this function itself does not retry or roll anything back.
+Once Error is set, lower status calls cannot reduce it. The outer action loop stops normal later steps after the script returns. Later engine finalization may perform configured rollback/file-error handling, but `LogError` itself does not roll back a transaction, reverse file operations or retry. Do not rely on later finalization to prevent the next statement in the current script from committing or writing. Preserve explicit cleanup and verify its ownership. Auto-retry configuration can later reset status for a new attempt.
 
 External effects already committed by earlier script statements are not reversed automatically. Calling `LogError` is a flow-status operation, not a transaction primitive.
 

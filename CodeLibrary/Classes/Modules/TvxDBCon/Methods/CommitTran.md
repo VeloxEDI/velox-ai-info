@@ -5,6 +5,8 @@ sidebar_position: 1
 classification: public
 status: review-required
 owner: Cam Hart
+last_updated_by: Kevin Tobias
+last_updated: "2026-11-16T23:15:15Z"
 keywords: [velox, scripting, database, transaction, commit]
 ---
 
@@ -15,13 +17,25 @@ procedure CommitTran;
 ### Example
 ```Delphi
 procedure ScriptEvent(var Value: Variant);
+var
+  Con: TvxDBCon;
 begin
-  if DBCon = nil then
-    raise Exception.Create('No database connection is available');
-  DBCon.CommitTran;
-  Value := True;
+  Con := DBCon;
+  if Con = nil then
+  begin
+    LogError('No database connection is available.');
+    Exit;
+  end;
+  try
+    Con.CommitTran;
+  except
+    LogError('Database commit failed: ' + ExceptionToString(ExceptionType, ExceptionParam));
+    Exit;
+  end;
 end;
 ```
+
+Only invoke this operation for a transaction boundary the caller is authorised to finish. LogError reports failure; it does not perform the transaction operation or undo prior external effects.
 
 ### Usage
 

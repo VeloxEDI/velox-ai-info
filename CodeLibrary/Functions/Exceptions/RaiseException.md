@@ -5,6 +5,8 @@ sidebar_position: 6
 classification: public
 status: review-required
 owner: Cam Hart
+last_updated_by: Kevin Tobias
+last_updated: "2026-11-16T23:15:15Z"
 keywords:
   - velox
   - scripting
@@ -18,7 +20,9 @@ procedure RaiseException(Ex: TIFException; Param: string);
 ```
 
 ### Example
-```Delphi
+**Exception API reference only — not a recommended generated-script failure pattern.** These APIs remain documented accurately. Generated Velox scripts must use [LogError with explicit stop/propagation](../../../instructions/scripts/failure-handling.md).
+
+```Delphi velox-role="api-reference" reason="Demonstrates exception API semantics; not a generated-script recommendation"
 procedure ScriptEvent(var Value: Variant);
 var
   Candidate: string;
@@ -41,7 +45,7 @@ end;
 
 | Name | Type | Description |
 |---|---|---|
-| `Ex` | `TIFException` | VM error category. Use `erCustomError` for a deliberate script-defined validation or business-rule failure; use another category only when its runtime meaning is genuinely applicable. |
+| `Ex` | `TIFException` | VM error category. In this API, `erCustomError` represents a custom VM error. This is an API description, not a recommendation to generate exception-based validation. |
 | `Param` | `string` | Text saved with the error. Its display treatment depends on `Ex`; the exception runtime converts it through an ANSI-string path. |
 
 **Errors**
@@ -50,7 +54,7 @@ The requested exception is the procedure's normal outcome. If no script handler 
 
 **Usage notes**
 
-Validate predictable Null, empty, range and format cases directly when recovery is local. Raise `erCustomError` when the current operation cannot continue and the caller needs the normal Velox exception path. Keep `Param` concise and avoid customer-sensitive values unless the approved logging/exposure policy permits them.
+Generated Velox scripts must report a failure with `LogError` and explicitly stop/propagate failure as described in the mandatory authoring standard. Do not substitute this API for that pattern. The API remains documented for accurate interpretation of existing code; keep diagnostic parameters concise and free of secrets.
 
 ### Additional Technical Info
 `RaiseException` creates a PascalScript virtual-machine error with a chosen `TIFException` category and parameter. For every category other than `ErNoError`, it interrupts the current statement sequence and transfers control through the VM's `finally`/`except` stack or, when unhandled, out to the owning Velox execution boundary.

@@ -5,6 +5,8 @@ sidebar_position: 20
 classification: public
 status: review-required
 owner: Cam Hart
+last_updated_by: Kevin Tobias
+last_updated: "2026-11-16T23:15:15Z"
 keywords: [velox, scripting, constant, exception, pascalscript, custom-error, validation]
 ---
 
@@ -14,7 +16,9 @@ erCustomError = 24
 
 ### Example
 
-```Delphi
+**Exception API reference only — not a recommended generated-script failure pattern.** These APIs remain documented accurately. Generated Velox scripts must use [LogError with explicit stop/propagation](../../../instructions/scripts/failure-handling.md).
+
+```Delphi velox-role="api-reference" reason="Demonstrates exception API semantics; not a generated-script recommendation"
 procedure RequireFictionalValue(const Candidate: string);
 begin
   if Candidate = '' then
@@ -39,7 +43,7 @@ When a nested `EPSException` is translated, the runtime retains that exception's
 #### Behavior, recovery and quirks
 
 - Because the parameter becomes the entire display message, keep it actionable and safe for logs or user-visible channels. Do not include credentials, tokens or unnecessary customer data.
-- Use this member for failures your script intentionally owns. Do not use VM-corruption categories merely to make a message appear more severe.
+- This member identifies a VM custom-error category; generated-script failures must instead use `LogError` and explicit control flow. Do not use exception APIs or VM-corruption categories as substitutes.
 - Raising it transfers control through `finally`/`except` frames and can fail the current event or Flow action. It does not undo side effects completed before the raise.
 - Exception transfer is not a database, dataset, filesystem or external-system transaction. Any earlier side effect remains unless the called API or surrounding Flow provides an explicit rollback contract.
 - Do not persist the numeric ordinal as an integration contract. Store the member name, formatted message, parameter and relevant procedure/position with the Velox version.

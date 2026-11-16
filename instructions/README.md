@@ -5,12 +5,14 @@ classification: public
 status: review-required
 owner: Kevin Tobias
 last_updated_by: Kevin Tobias
-last_updated: "2026-10-15T01:47:56Z"
+last_updated: "2026-11-16T23:15:15Z"
 ---
 
 # Configuration authoring instructions
 
 Before creating, editing or reviewing Velox configuration, read [common.md](common.md) and every type entry point relevant to the objects involved. Read type entry points explicitly even if generated output is saved elsewhere: nested `AGENTS.md` files are not necessarily discovered automatically.
+
+For importable CFG output, also follow [CFG import packaging](cfg-packaging.md) and complete [the AI-generation checklist](common.md#ai-generation-checklist). These cross-type rules cover the template wrapper, primary module, identities, activation states and separate import/compilation checks.
 
 | Configuration type | Entry point | Additional local standards |
 | --- | --- | --- |
@@ -22,7 +24,7 @@ Before creating, editing or reviewing Velox configuration, read [common.md](comm
 | Flows | [flows/AGENTS.md](flows/AGENTS.md) | No additional type-specific convention recorded yet |
 | Actions | [actions/AGENTS.md](actions/AGENTS.md) | No additional type-specific convention recorded yet |
 | Transports | [transports/AGENTS.md](transports/AGENTS.md) | No additional type-specific convention recorded yet |
-| Scripts and SQL scripts | [scripts/AGENTS.md](scripts/AGENTS.md) | [Managed helpers](scripts/helpers.md); [event Value context](scripts/event-value-context.md) |
+| Scripts and SQL scripts | [scripts/AGENTS.md](scripts/AGENTS.md) | [Failure handling](scripts/failure-handling.md); [compatibility](scripts/compatibility.md); [managed helpers](scripts/helpers.md); [event Value context](scripts/event-value-context.md) |
 | Scriptlets | [scriptlets/AGENTS.md](scriptlets/AGENTS.md) | No additional type-specific convention recorded yet |
 | Reports | [reports/AGENTS.md](reports/AGENTS.md) | No additional type-specific convention recorded yet |
 | Variables | [variables/AGENTS.md](variables/AGENTS.md) | No additional type-specific convention recorded yet |

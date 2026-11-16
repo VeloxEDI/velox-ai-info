@@ -5,7 +5,7 @@ classification: public
 status: review-required
 owner: Kevin Tobias
 last_updated_by: Kevin Tobias
-last_updated: "2026-10-15T01:47:56Z"
+last_updated: "2026-11-16T23:15:15Z"
 ---
 
 # Shared configuration authoring rules
@@ -19,6 +19,7 @@ Apply these requirements alongside every relevant type entry point in [the catal
 3. Inspect existing configuration and linked product documentation. Use `CodeLibrary/` for scripting APIs and signatures. Do not invent classes, properties, enum values, functions, defaults or runtime semantics.
 4. State unresolved decisions and evidence gaps. If instructions cannot be retrieved, report the gap rather than inventing a replacement standard.
 5. Whenever script code is involved, read [the scripts entry point](scripts/AGENTS.md), including managed helper usage and event-specific `Value` rules. This applies even when scripts are embedded in another configuration type.
+6. Before creating an importable CFG, follow [CFG import packaging](cfg-packaging.md): wrapper identity/state, primary-module order, per-module activation and importer review are part of authoring.
 
 ## Preserve the configuration contract
 
@@ -34,5 +35,27 @@ Authoring conventions define how to construct a configuration; they do not prove
 
 ## Validation and reporting
 
+Run `node tools/check-script-failures.mjs` for repository examples and the same checker with `--root` pointing at generated script/CFG output before delivery. Run `node --test tools/tests/check-script-failures.test.mjs` when maintaining the checker. See [failure handling](scripts/failure-handling.md) for scope, explicit exemptions and control-flow review.
+
+
 Check syntax, identities, references and applicable type rules. Run actual Velox compilation and isolated execution/persistence checks when a target environment is available. Report file inspection, compilation and runtime testing separately, including checks not performed. State changed objects, decisions, exceptions and remaining evidence gaps.
+
+## AI-generation checklist
+
+- [ ] Every script failure calls `LogError` and stops the procedure; each validation helper returns/propagates failure and its calling event checks it and exits.
+- [ ] Do not emit raise/rethrow statements, `Exception.Create` or exception API substitutes. Retain supported unexpected-failure try..except handling, use LogError there, and stop.
+- [ ] Audit transaction/dataset/file cleanup explicitly. Logging does not enter except or roll anything back; an early Exit must still run required cleanup and must not reach a later commit/success branch.
+- [ ] Do not substitute warnings, issues, duplicates or cancellation when a Process must fail. Preserve appropriate SQL/native implementation code and clearly mark non-recommended reference/invalid examples.
+- [ ] Run the script-failure regression check on repository and generated output. Report extraction/static checks separately from actual Velox build/context compilation and execution results.
+
+
+- [ ] Identify the primary requested module and every required dependency in a package manifest; record expected module count and intended activation state per module.
+- [ ] Compare CFG syntax, wrapper structure and module order with a verified native export for the relevant version/type; preserve mandatory native class/property names even when prose says Process.
+- [ ] For `TvxConfigTemplate`, use wrapper FIDS `{11111111-1111-1111-1111-111111111111}` and `Active = True`. Give genuinely new real modules distinct identities and retain existing identities/references when editing.
+- [ ] Put the primary requested module first; a Process-led package starts with its primary `TvxActionMan`, then the folder and dependencies in the verified native layout.
+- [ ] When Processes must remain disabled, check every included Process is `Active = False`; keep the wrapper and required supporting modules active, with explicitly reviewed exceptions. Do not indiscriminately disable the whole package.
+- [ ] Preserve unrelated scripts, mappings, SQL and reference graphs during a packaging-only correction. Apply each relevant type's authoring rules without treating saved `CompiledStatus` as compilation proof.
+- [ ] Review the importer's root, expected module count and every Add/Update/Add Duplicate/Ignore/Same decision. Do not Ignore the primary/root module.
+- [ ] Report static checks, actual successful import, native Test Compile and controlled runtime tests separately, with evidence or an explicit not-performed result for each.
+- [ ] For combined fixes, state which changes were tested together; do not claim isolated causality without isolated evidence. See [packaging evidence and limitations](cfg-packaging.md#sources-and-verification-scope).
 

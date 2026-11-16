@@ -5,6 +5,8 @@ sidebar_position: 6
 classification: public
 status: review-required
 owner: Cam Hart
+last_updated_by: Kevin Tobias
+last_updated: "2026-11-16T23:15:15Z"
 keywords:
   - velox
   - scripting
@@ -20,16 +22,16 @@ function ExecuteFlow(const aFID: TGuid; const aTest: boolean): boolean;
 
 ### Example
 ```Delphi
-procedure ScriptEvent(var Value: variant);
+procedure ScriptEvent(var Value: Variant);
 var
   ChildFlowFID: TGuid;
 begin
   ChildFlowFID := StringToGUID('{11111111-2222-3333-4444-555555555555}');
-
   if not ExecuteFlow(ChildFlowFID, Test) then
-    raise Exception.Create('The referenced flow did not complete successfully');
-
-  Value := True;
+  begin
+    LogError('The referenced Process did not complete successfully.');
+    Exit;
+  end;
 end;
 ```
 

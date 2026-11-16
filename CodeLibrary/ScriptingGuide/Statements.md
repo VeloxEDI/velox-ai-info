@@ -3,8 +3,10 @@ title: Statements
 description: Control-flow and block statements supported by the Velox Pascal scripting compiler.
 sidebar_position: 9
 classification: public
-status: approved
+status: review-required
 owner: Cam Hart
+last_updated_by: Kevin Tobias
+last_updated: "2026-11-16T23:15:15Z"
 keywords:
   - velox
   - scripting
@@ -50,7 +52,7 @@ Every loop in an integration must have a deterministic termination condition. Da
 
 Use `try..except` when the script can safely handle a known failure and provide an appropriate result or log. Use `try..finally` to release a caller-owned object or restore state regardless of success. Do not free context-owned Velox objects in a finally block.
 
-The surrounding Velox event boundary also catches exceptions, logs them and can change processing status. A local `except` that swallows an error prevents that boundary from seeing it; log or return a meaningful result when recovery is genuinely safe.
+The surrounding Velox event boundary can also catch unexpected failures. Generated scripts must use `LogError` and explicit `Exit`/checked helper propagation rather than raising or swallowing errors. Preserve supported try..except handling and explicit finally cleanup. Logging alone neither exits nor triggers except nor rolls back prior effects. Follow [mandatory failure handling](../../instructions/scripts/failure-handling.md).
 
 ## Common mistakes
 

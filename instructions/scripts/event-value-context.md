@@ -5,7 +5,7 @@ classification: public
 status: review-required
 owner: Kevin Tobias
 last_updated_by: Kevin Tobias
-last_updated: "2026-10-15T01:47:56Z"
+last_updated: "2026-11-16T23:15:15Z"
 ---
 
 # Interpret Value in its event context
@@ -13,6 +13,9 @@ last_updated: "2026-10-15T01:47:56Z"
 Applies whenever generating, editing or reviewing an event with a `var Value: Variant` parameter. The procedure signature alone does not define the meaning of `Value`; identify the owning action, formula or event first.
 
 ## Required rules
+
+Always report script failure with `LogError` and stop/propagate it as described in [failure handling](failure-handling.md). A host-specific `Value := False` can still be meaningful control logic, but is not a substitute for marking a Process failed. File Router no-match is not itself necessarily a script failure; retain that distinction.
+
 
 - Do not append `Value := True` as a universal success footer or filler. A Custom Script containing only this assignment performs no useful business work and does not trigger a file route.
 - User-confirmed ordinary Custom Script authoring practice treats the standalone assignment below as redundant. Generate the actual requested work instead; do not add an assignment solely to make the script appear complete.
