@@ -17,6 +17,8 @@ jobs:
         with:
           node-version: '22'
       - name: Test the static regression checker
-        run: node --test tools/tests/check-script-failures.test.mjs
+        run: node --test tools/tests/check-script-failures.test.mjs tools/tests/check-cfg-bindings.test.mjs
       - name: Audit recommended scripts and CFG formulas
         run: node tools/check-script-failures.mjs
+      - name: Audit CFG Flow child-data bindings
+        run: node tools/check-cfg-bindings.mjs

@@ -5,7 +5,7 @@ classification: public
 status: review-required
 owner: Kevin Tobias
 last_updated_by: Kevin Tobias
-last_updated: "2026-11-16T23:15:15Z"
+last_updated: "2026-11-17T23:28:09Z"
 ---
 
 # Shared configuration authoring rules
@@ -20,6 +20,7 @@ Apply these requirements alongside every relevant type entry point in [the catal
 4. State unresolved decisions and evidence gaps. If instructions cannot be retrieved, report the gap rather than inventing a replacement standard.
 5. Whenever script code is involved, read [the scripts entry point](scripts/AGENTS.md), including managed helper usage and event-specific `Value` rules. This applies even when scripts are embedded in another configuration type.
 6. Before creating an importable CFG, follow [CFG import packaging](cfg-packaging.md): wrapper identity/state, primary-module order, per-module activation and importer review are part of authoring.
+7. For Flow data/action bindings, follow [child-data binding guidance](flows/child-data-bindings.md). Inspect native ownership, real component identifiers and expected classes separately from module identities and display labels.
 
 ## Preserve the configuration contract
 
@@ -41,6 +42,11 @@ Run `node tools/check-script-failures.mjs` for repository examples and the same 
 Check syntax, identities, references and applicable type rules. Run actual Velox compilation and isolated execution/persistence checks when a target environment is available. Report file inspection, compilation and runtime testing separately, including checks not performed. State changed objects, decisions, exceptions and remaining evidence gaps.
 
 ## AI-generation checklist
+
+- [ ] Prefer unique native-style Flow data component names in the verified native owner/container layout; do not interpret the combined correction as a universal ban on other names.
+- [ ] Resolve Map Source/Dest, outbound Transport Source and Custom Script Source to declared data items in the correct Flow and verify their expected classes/Definition contracts. Keep these unquoted component references separate from SourceFIDS/DestFIDS and human-facing name properties.
+- [ ] Run `node tools/check-cfg-bindings.mjs` and its tests, including `--root` against generated output. Review every error and unverified-contract note; the checker does not prove native import binding.
+- [ ] After native import, reopen the Flow and confirm the selected data links persist. Report static validation, import/binding, native compilation and execution separately, with not-performed results where appropriate.
 
 - [ ] Every script failure calls `LogError` and stops the procedure; each validation helper returns/propagates failure and its calling event checks it and exits.
 - [ ] Do not emit raise/rethrow statements, `Exception.Create` or exception API substitutes. Retain supported unexpected-failure try..except handling, use LogError there, and stop.

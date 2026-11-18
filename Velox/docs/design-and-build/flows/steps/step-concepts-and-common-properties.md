@@ -3,8 +3,10 @@ title: "Flow-step concepts and common properties"
 description: "Understand the ordered action-step model, shared properties, validation and status behaviour used by every Velox Flow step."
 sidebar_position: 20
 classification: public
-status: approved
+status: review-required
 owner: Cam Hart
+last_updated_by: Kevin Tobias
+last_updated: "2026-11-17T23:28:09Z"
 keywords: [Flow step, action order, source data, destination data, active step]
 ---
 
@@ -23,6 +25,10 @@ An active Flow step runs as one item in the Flow's ordered action list. Within o
 | **Ignore empty source data** | Cleared | Lets an applicable step proceed when its source is empty. Enable only when empty is an explicit valid outcome. |
 
 Changing list order changes business behaviour. A later step must not assume an output exists if an earlier step can ignore empty input, be inactive or finish with a non-success status.
+
+## CFG child-data references
+
+For generated CFGs, follow [the child-data binding standard](../../../../../instructions/flows/child-data-bindings.md). Source/Dest refer to actual Flow-local data component names, unquoted, with the native owner/container layout. Prefer unique native-style `vxDefDB<number>` and `vxDefFile<number>` names, keeping `SourceName` role labels and Definition module `SourceFIDS`/`DestFIDS` distinct. Verify Map source/destination, outbound Transport source and Custom Script source against declared children and compatible classes. The observed successful correction changed naming and references together; it does not prove other names universally unsupported. After import, reopen the Flow and confirm selections persist; static checks alone do not prove native binding.
 
 ## Status and cancellation
 

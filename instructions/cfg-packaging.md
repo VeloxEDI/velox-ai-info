@@ -5,7 +5,7 @@ classification: public
 status: review-required
 owner: Kevin Tobias
 last_updated_by: Kevin Tobias
-last_updated: "2026-11-16T22:56:36Z"
+last_updated: "2026-11-17T23:28:09Z"
 ---
 
 # CFG import packaging
@@ -50,6 +50,12 @@ Review each actual module's role and its native properties. Preserve explicitly 
 Human-facing instructions may call the primary executable module a **Process**; existing product pages also use **Flow**. Keep the native `TvxActionMan` class and properties such as `FIDS`, `FolderFIDS`, `Active` and applicable native action-reference properties exactly as exported. Do not invent `TvxProcess` or rename streamed properties to match display terminology.
 
 ## Small annotated example
+
+### Flow child-data binding companion standard
+
+For packages containing Flow actions/data, also follow [CFG Flow child-data bindings](flows/child-data-bindings.md). Use the verified native naming/ownership pattern, keep action Source/Dest component references distinct from Definition SourceFIDS/DestFIDS, and check the intended Map/Transport/Custom Script data classes. The user-verified correction involved naming and reference changes together; do not attribute the outcome to any single change or declare arbitrary names universally unsupported. Reopen the imported Flow and confirm selections persist. Static reference validation does not establish successful native binding.
+
+### Wrapper illustration
 
 This is a structural illustration, not a complete importable or tested CFG. All non-sentinel identities are fictional examples, not reusable identities for new generated modules. It omits action steps, Definitions, connections and version-specific metadata; construct complete packages from verified native exports.
 

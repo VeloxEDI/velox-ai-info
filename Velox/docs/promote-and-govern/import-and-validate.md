@@ -6,7 +6,7 @@ classification: public
 status: review-required
 owner: Cam Hart
 last_updated_by: Kevin Tobias
-last_updated: "2026-11-16T22:56:36Z"
+last_updated: "2026-11-17T23:28:09Z"
 keywords: [import, CFG, Add, Update, Duplicate, Ignore, Same]
 ---
 
@@ -33,6 +33,7 @@ The importer may initially mark existing folders, Transports and DB Connections 
 3. Review every **Add**, **Update**, **Add Duplicate**, **Ignore** and **Same** decision, including supporting modules. Assign explicit actions where required and do not set the primary/root module to **Ignore**.
 4. Select **Import** once. Do not repeat an uncertain import without first inspecting the target.
 5. Confirm each expected module exists under the correct folder, resolves its dependencies and retains intended target-specific values and activation state. Keep requested Processes disabled; distinguish their state from required supporting modules.
+   Reopen the Flow and verify the Map source/destination, Transport source and Custom Script source selections are populated and persist after saving/reopening as appropriate. Imported data items alone are not proof of native action binding. Follow [the child-data binding standard](../../../instructions/flows/child-data-bindings.md); its user-verified correction changed naming and matching references together, without isolated causal proof.
 6. Refresh/restart the relevant runtime and run controlled functional checks through Flow, Transport or API boundaries.
 7. Record resulting identities, validation results and deviations from the package manifest.
 
