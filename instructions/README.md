@@ -5,7 +5,7 @@ classification: public
 status: review-required
 owner: Kevin Tobias
 last_updated_by: Kevin Tobias
-last_updated: "2026-11-17T23:28:09Z"
+last_updated: "2026-11-19T21:13:59Z"
 ---
 
 # Configuration authoring instructions
@@ -16,7 +16,7 @@ For importable CFG output, also follow [CFG import packaging](cfg-packaging.md) 
 
 | Configuration type | Entry point | Additional local standards |
 | --- | --- | --- |
-| Maps | [maps/AGENTS.md](maps/AGENTS.md) | [Field authoring](maps/field-authoring.md) |
+| Maps | [maps/AGENTS.md](maps/AGENTS.md) | [Field authoring](maps/field-authoring.md); [event header context](maps/field-authoring.md#procedure-header-context-comments) |
 | DB connections | [db-connections/AGENTS.md](db-connections/AGENTS.md) | No additional type-specific convention recorded yet |
 | File connections | [file-connections/AGENTS.md](file-connections/AGENTS.md) | No additional type-specific convention recorded yet |
 | DB Definitions | [db-definitions/AGENTS.md](db-definitions/AGENTS.md) | No additional type-specific convention recorded yet |

@@ -5,7 +5,7 @@ classification: public
 status: review-required
 owner: Kevin Tobias
 last_updated_by: Kevin Tobias
-last_updated: "2026-11-16T23:15:15Z"
+last_updated: "2026-11-19T21:13:59Z"
 ---
 
 # Scripts and SQL scripts authoring entry point
@@ -21,6 +21,8 @@ Read and follow [scripting compatibility](compatibility.md). Do not generate inl
 Read and follow [mandatory failure handling](failure-handling.md) for every script. Use `LogError` plus explicit Exit/checked helper propagation, never raise/Exception.Create or a substitute status. Preserve cleanup and try..except for unexpected failures. Run the regression checker before delivery; distinguish static checks from native compilation.
 
 For SQL Script modules inspect [SQL script guidance](../../Velox/docs/design-and-build/transformations-output/sql-scripts.md). For event scripts, also read the entry point of the owning object; Map field scripts require [Maps](../maps/AGENTS.md).
+
+For meaningful Map dataset/view and field event scripts, follow [native procedure-header context comments](../maps/field-authoring.md#procedure-header-context-comments). Use the actual destination dataset or dataset.field context, preserve existing notes and native signatures/bindings, and leave intentionally unmapped events empty. Do not apply a Map-specific header/signature to another host or promise exact error attribution from every comment.
 
 Read the entry points for other object types this configuration depends on. Report documentation gaps and conflicts instead of inventing conventions. When maintaining these instructions, update the metadata and validate local links.
 

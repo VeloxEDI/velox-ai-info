@@ -5,7 +5,7 @@ classification: public
 status: review-required
 owner: Kevin Tobias
 last_updated_by: Kevin Tobias
-last_updated: "2026-11-17T23:28:09Z"
+last_updated: "2026-11-19T21:13:59Z"
 ---
 
 # Shared configuration authoring rules
@@ -42,6 +42,8 @@ Run `node tools/check-script-failures.mjs` for repository examples and the same 
 Check syntax, identities, references and applicable type rules. Run actual Velox compilation and isolated execution/persistence checks when a target environment is available. Report file inspection, compilation and runtime testing separately, including checks not performed. State changed objects, decisions, exceptions and remaining evidence gaps.
 
 ## AI-generation checklist
+
+- [ ] For meaningful Map events, apply [destination-context procedure-header comments](maps/field-authoring.md#procedure-header-context-comments), preserve/update existing notes and retain native signatures/bindings. Do not create empty events solely for comments or populate intentionally unmapped event editors.
 
 - [ ] Prefer unique native-style Flow data component names in the verified native owner/container layout; do not interpret the combined correction as a universal ban on other names.
 - [ ] Resolve Map Source/Dest, outbound Transport Source and Custom Script Source to declared data items in the correct Flow and verify their expected classes/Definition contracts. Keep these unquoted component references separate from SourceFIDS/DestFIDS and human-facing name properties.
