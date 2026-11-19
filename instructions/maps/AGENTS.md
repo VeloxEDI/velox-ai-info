@@ -5,7 +5,7 @@ classification: public
 status: review-required
 owner: Kevin Tobias
 last_updated_by: Kevin Tobias
-last_updated: "2026-11-19T21:13:59Z"
+last_updated: "2026-11-19T21:20:24Z"
 ---
 
 # Maps authoring entry point
@@ -19,6 +19,8 @@ Read and follow [field-authoring.md](field-authoring.md) before generating, edit
 For every meaningful Map event, follow [procedure-header context comments](field-authoring.md#procedure-header-context-comments): destination dataset for dataset/view events, destination dataset plus field for field events. Preserve and update comments when adapting mappings; keep verified native signatures/bindings unchanged and do not create handlers solely for comments. Kevin's automatic field OnMap/AfterMap comment observation is user-confirmed, not independently source-verified.
 
 For Map event scripts, also follow [Scripts](../scripts/AGENTS.md): use managed helpers and verify each event's `Value` contract. Preserve meaningful field assignments and record-control logic.
+
+Follow [native field-helper usage](../scripts/field-helpers.md) for concise field checks. Use `IsNullEmpty`/`NotNullEmpty` only when their documented semantics match; preserve exact-NULL/zero requirements and nonblank `AsString` output rather than introducing trimming or extra validation.
 
 Read the entry points for other object types this configuration depends on. Report documentation gaps and conflicts instead of inventing conventions. When maintaining these instructions, update the metadata and validate local links.
 

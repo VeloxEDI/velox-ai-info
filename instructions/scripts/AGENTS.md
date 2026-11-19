@@ -5,7 +5,7 @@ classification: public
 status: review-required
 owner: Kevin Tobias
 last_updated_by: Kevin Tobias
-last_updated: "2026-11-19T21:13:59Z"
+last_updated: "2026-11-19T21:20:24Z"
 ---
 
 # Scripts and SQL scripts authoring entry point
@@ -15,6 +15,8 @@ Applies to: SQL Script modules and embedded Velox event scripts.
 Before creating, editing or reviewing this type, read [shared rules](../common.md) and the [instruction catalogue](../README.md). Inspect [the product documentation](../../Velox/docs/design-and-build/scripting-code-library/index.md) and existing configuration for supported settings and behaviour.
 
 Before authoring or reviewing Velox script code, read and follow [managed helper rules](helpers.md) and [event Value context](event-value-context.md). Use documented helpers such as `Json`, `JsonArray` and `List` instead of manual construction/freeing of their corresponding workspaces. Do not add a blanket `Value := True` footer; determine its meaning from the owning event, especially for File Router predicates.
+
+For field checks, follow [concise native field-helper usage](field-helpers.md). Prefer `IsNullEmpty`/`NotNullEmpty` when their NULL/trimmed-empty semantics match; preserve exact-NULL and numeric/date-zero tests and copy nonblank output with `AsString` unless trimming is explicitly required. Do not add checks or change business behaviour merely to shorten code, or claim a measured runtime improvement.
 
 Read and follow [scripting compatibility](compatibility.md). Do not generate inline character-set/range membership such as `lTag[k] in ['A'..'Z', '/']`; use explicit comparisons. Prefer explicit comparisons for other small inline alternatives/ranges without claiming that all sets or every `in` expression is unsupported. Valid Delphi syntax is not proof of Velox support. Distinguish extraction/static checks from actual compilation in Velox.
 

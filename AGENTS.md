@@ -56,6 +56,7 @@ When generating scripts:
 - Follow [mandatory script failure handling](instructions/scripts/failure-handling.md): always report a script failure with `LogError` and stop with `Exit`; helpers must propagate failure to the event. Do not generate raise/rethrow statements, `Exception.Create` or exception APIs as substitutes. Preserve explicit cleanup and supported unexpected-failure handlers. Run `node tools/check-script-failures.mjs` on this repository and `--root` for generated output; this static check is not Velox compilation.
 - Follow recommended patterns in `/CodeLibrary`; clearly marked invalid, exception API reference-only and native Delphi examples are not generated-script templates.
 - Use documented managed helpers such as `Json`, `JsonArray` and `List` instead of manually constructing/freeing their corresponding workspaces. Never free a helper.
+- Follow [native field-helper guidance](instructions/scripts/field-helpers.md): prefer `TvxField.IsNullEmpty`/`NotNullEmpty` when their documented semantics match. Preserve exact-NULL and zero tests, and retain nonblank `AsString` output unless trimming is intended. Shorter code must not change business behaviour; no measured runtime benefit is claimed.
 - Do not append `Value := True` as a generic success footer. Identify the host: in File Router formulas it is a route predicate; preserve meaningful result handling in other contexts.
 - Do not invent Velox-specific functions.
 - Prefer simple, readable scripts suitable for use inside Velox Flow Script Events.

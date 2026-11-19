@@ -5,7 +5,7 @@ classification: public
 status: review-required
 owner: Kevin Tobias
 last_updated_by: Kevin Tobias
-last_updated: "2026-11-19T21:13:59Z"
+last_updated: "2026-11-19T21:20:24Z"
 ---
 
 # Map and CFG field authoring instructions
@@ -26,6 +26,8 @@ Apply this convention only to the relevant `TvxFieldMap` objects. Preserve field
 Do not create placeholder `OnMapEvent` handlers solely to set `Field.Required := False` and `Value := Null`, hold `DISABLED` comments or obtain a green indicator. Record unresolved mappings and decision notes in the mapping documentation. An unresolved mapping requires a decision before it can be treated as intentionally unmapped.
 
 When adding or removing a field event, update that field's status to match its intent. Do not rewrite status values on unrelated CFG objects or replace existing compilation/error statuses across a configuration.
+
+For meaningful field-event code, follow [concise native field-helper usage](../scripts/field-helpers.md): prefer `IsNullEmpty`/`NotNullEmpty` for matching NULL/trimmed-empty requirements, retain exact-NULL and zero checks when intended, and preserve nonblank output with `AsString` unless trimming is required. Do not create handlers or change business behaviour solely to shorten checks.
 
 ## Procedure-header context comments
 

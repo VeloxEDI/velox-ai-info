@@ -5,7 +5,7 @@ classification: public
 status: review-required
 owner: Kevin Tobias
 last_updated_by: Kevin Tobias
-last_updated: "2026-11-19T21:13:59Z"
+last_updated: "2026-11-19T21:20:24Z"
 ---
 
 # Shared configuration authoring rules
@@ -42,6 +42,8 @@ Run `node tools/check-script-failures.mjs` for repository examples and the same 
 Check syntax, identities, references and applicable type rules. Run actual Velox compilation and isolated execution/persistence checks when a target environment is available. Report file inspection, compilation and runtime testing separately, including checks not performed. State changed objects, decisions, exceptions and remaining evidence gaps.
 
 ## AI-generation checklist
+
+- [ ] For field checks, apply [native field-helper usage](scripts/field-helpers.md) only where semantics match. Preserve exact-NULL/zero requirements and nonblank output, avoid redundant checks and claim readability/maintenance benefits without unmeasured speed claims.
 
 - [ ] For meaningful Map events, apply [destination-context procedure-header comments](maps/field-authoring.md#procedure-header-context-comments), preserve/update existing notes and retain native signatures/bindings. Do not create empty events solely for comments or populate intentionally unmapped event editors.
 

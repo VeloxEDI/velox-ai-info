@@ -5,7 +5,7 @@ classification: public
 status: review-required
 owner: Kevin Tobias
 last_updated_by: Kevin Tobias
-last_updated: "2026-11-19T21:13:59Z"
+last_updated: "2026-11-19T21:20:24Z"
 ---
 
 # Configuration authoring instructions
@@ -24,7 +24,7 @@ For importable CFG output, also follow [CFG import packaging](cfg-packaging.md) 
 | Flows | [flows/AGENTS.md](flows/AGENTS.md) | [CFG child-data bindings](flows/child-data-bindings.md) |
 | Actions | [actions/AGENTS.md](actions/AGENTS.md) | No additional type-specific convention recorded yet |
 | Transports | [transports/AGENTS.md](transports/AGENTS.md) | No additional type-specific convention recorded yet |
-| Scripts and SQL scripts | [scripts/AGENTS.md](scripts/AGENTS.md) | [Failure handling](scripts/failure-handling.md); [compatibility](scripts/compatibility.md); [managed helpers](scripts/helpers.md); [event Value context](scripts/event-value-context.md) |
+| Scripts and SQL scripts | [scripts/AGENTS.md](scripts/AGENTS.md) | [Failure handling](scripts/failure-handling.md); [compatibility](scripts/compatibility.md); [managed helpers](scripts/helpers.md); [field helpers](scripts/field-helpers.md); [event Value context](scripts/event-value-context.md) |
 | Scriptlets | [scriptlets/AGENTS.md](scriptlets/AGENTS.md) | No additional type-specific convention recorded yet |
 | Reports | [reports/AGENTS.md](reports/AGENTS.md) | No additional type-specific convention recorded yet |
 | Variables | [variables/AGENTS.md](variables/AGENTS.md) | No additional type-specific convention recorded yet |
