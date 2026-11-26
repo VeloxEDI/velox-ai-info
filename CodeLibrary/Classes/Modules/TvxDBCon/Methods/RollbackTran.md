@@ -5,6 +5,8 @@ sidebar_position: 3
 classification: public
 status: review-required
 owner: Cam Hart
+last_updated_by: Kevin Tobias
+last_updated: "2026-11-16T23:15:15Z"
 keywords: [velox, scripting, database, transaction, rollback]
 ---
 
@@ -15,13 +17,25 @@ procedure RollbackTran;
 ### Example
 ```Delphi
 procedure ScriptEvent(var Value: Variant);
+var
+  Con: TvxDBCon;
 begin
-  if DBCon = nil then
-    raise Exception.Create('No database connection is available');
-  DBCon.RollbackTran;
-  Value := False;
+  Con := DBCon;
+  if Con = nil then
+  begin
+    LogError('No database connection is available.');
+    Exit;
+  end;
+  try
+    Con.RollbackTran;
+  except
+    LogError('Database rollback failed: ' + ExceptionToString(ExceptionType, ExceptionParam));
+    Exit;
+  end;
 end;
 ```
+
+Only invoke this operation for a transaction boundary the caller is authorised to finish. LogError reports failure; it does not perform the transaction operation or undo prior external effects.
 
 ### Usage
 

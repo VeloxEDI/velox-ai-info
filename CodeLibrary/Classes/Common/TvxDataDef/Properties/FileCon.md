@@ -5,6 +5,8 @@ sidebar_position: 4
 classification: public
 status: review-required
 owner: Cam Hart
+last_updated_by: Kevin Tobias
+last_updated: "2026-11-16T23:15:15Z"
 keywords: [velox, scripting, hidden-ancestor, data-definition, file-connection, lifecycle]
 ---
 
@@ -15,13 +17,24 @@ property FileCon: TvxFileCon read;
 ### Example
 
 ```Delphi
-procedure RequireFileConnection(const Data: TvxFileDef);
+function RequireFileConnection(const Data: TvxFileDef): Boolean;
 begin
+  Result := False;
+  if Data = nil then
+  begin
+    LogError('No data definition is available.');
+    Exit;
+  end;
   if Data.FileCon = nil then
-    raise Exception.Create('No file-connection object is available');
-  { The object can still be unloaded; use it only in the configured flow context. }
+  begin
+    LogError('No file-connection object is available.');
+    Exit;
+  end;
+  Result := True;
 end;
 ```
+
+This helper returns `False` after logging failure. The calling event must check the result and `Exit` before doing further work; an `Exit` inside the helper does not exit its caller. Follow [mandatory script failure handling](../../../../../instructions/scripts/failure-handling.md).
 
 ### Usage
 

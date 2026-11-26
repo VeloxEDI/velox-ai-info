@@ -5,6 +5,8 @@ sidebar_position: 5
 classification: public
 status: review-required
 owner: Cam Hart
+last_updated_by: Kevin Tobias
+last_updated: "2026-11-16T23:15:15Z"
 keywords:
   - velox
   - scripting
@@ -18,7 +20,9 @@ function ExceptionType: TIFException;
 ```
 
 ### Example
-```Delphi
+**Exception API reference only — not a recommended generated-script failure pattern.** These APIs remain documented accurately. Generated Velox scripts must use [LogError with explicit stop/propagation](../../../instructions/scripts/failure-handling.md).
+
+```Delphi velox-role="api-reference" reason="Demonstrates exception API semantics; not a generated-script recommendation"
 procedure ScriptEvent(var Value: Variant);
 begin
   try

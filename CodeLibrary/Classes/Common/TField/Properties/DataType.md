@@ -5,6 +5,8 @@ sidebar_position: 11
 classification: public
 status: review-required
 owner: Cam Hart
+last_updated_by: Kevin Tobias
+last_updated: "2026-10-20T23:50:34Z"
 keywords: [velox, scripting, hidden-ancestor, tfield, datatype, tfieldtype, schema]
 ---
 
@@ -20,7 +22,8 @@ var
   Kind: TFieldType;
 begin
   Kind := Data.FieldByName(Name).DataType;
-  Result := Kind in [ftString, ftWideString, ftMemo, ftWideMemo];
+  Result := (Kind = ftString) or (Kind = ftWideString) or
+            (Kind = ftMemo) or (Kind = ftWideMemo);
 end;
 ```
 
@@ -28,12 +31,16 @@ end;
 
 `DataType` identifies the field's Velox TFieldType category for selecting safe value, conversion and serialisation logic.
 
-- Branch on explicit sets of supported types and include an error/default branch for future or provider-specific values.
+- Branch on explicit comparisons of supported types and include an error/default branch for future or provider-specific values.
 - Combine this property with [`Size`](Size.md), [`DataSize`](DataSize.md), [`Required`](Required.md) and external schema knowledge where needed.
 - Do not persist raw ordinal integers across Velox versions; use the named enumeration values in scripts.
 
 ### Additional Technical Info
 `DataType` is the read-only `TFieldType` assigned by the concrete field class and dataset field metadata.
+
+#### Example compatibility
+
+The example uses explicit enumeration comparisons as a conservative [scripting compatibility convention](../../../../../instructions/scripts/compatibility.md). This does not establish that enumeration-set membership is unsupported. No actual Velox compilation was performed for this example update.
 
 #### Source-backed behaviour
 

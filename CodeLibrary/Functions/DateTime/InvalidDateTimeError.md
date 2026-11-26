@@ -5,6 +5,8 @@ sidebar_position: 68
 classification: public
 status: review-required
 owner: Cam Hart
+last_updated_by: Kevin Tobias
+last_updated: "2026-11-16T23:15:15Z"
 keywords:
   - velox
   - scripting
@@ -25,10 +27,13 @@ begin
   try
     InvalidDateTimeError(2026, 2, 30, 9, 0, 0, 0, 0);
   except
-    Value := 'Invalid date and time fields were rejected';
+    LogError('Operation failed: ' + ExceptionToString(ExceptionType, ExceptionParam));
+    Exit;
   end;
 end;
 ```
+
+Follow [mandatory script failure handling](../../../instructions/scripts/failure-handling.md): a caught failure is not a successful Boolean/message result; log it as an error and stop.
 
 ### Usage
 
@@ -62,7 +67,7 @@ For normal input handling, use [`IsValidDateTime`](IsValidDateTime.md) and produ
 ### Additional Technical Info
 `InvalidDateTimeError` deliberately constructs and raises DateUtils' general invalid date/time conversion error. It can resolve special leave-as-is field values from a base date/time before formatting the message; it does not validate the fields itself.
 
-The example is fictional and source-reviewed. It catches the expected exception and was not executed by the documentation workflow.
+The fictional example catches the API's expected exception, reports failure with LogError and stops. It was not compiled or executed in Velox during this documentation update.
 
 **Implementation**
 

@@ -3,8 +3,10 @@ title: "try..finally"
 description: "Guaranteed cleanup blocks during normal and exceptional Velox script execution."
 sidebar_position: 9
 classification: public
-status: approved
+status: review-required
 owner: Cam Hart
+last_updated_by: Kevin Tobias
+last_updated: "2026-11-16T23:15:15Z"
 keywords:
   - velox
   - scripting
@@ -49,6 +51,8 @@ end;
 On normal completion, `Value` becomes `started|work|cleanup`. If the protected operation raised, the cleanup assignment would still be attempted before that exception propagated.
 
 In real scripts, use `finally` for a verified cleanup action such as restoring state or releasing a script-owned resource. Do not free or close Velox-owned datasets or objects unless their individual reference pages explicitly transfer ownership to the script.
+
+`LogError` does not throw or enter an `except` block. When a known failure is logged, use `Exit` and retain this explicit finally cleanup; when failure is inside a helper, return a checked failure result so the calling event also stops. Cleanup failures must be logged as errors too. See [mandatory failure handling](../../../instructions/scripts/failure-handling.md).
 
 ## Common mistakes
 

@@ -4,8 +4,10 @@ description: "Understand scripts, Scriptlets, variables, context objects and eve
 sidebar_position: 20
 slug: /scripting/scripting-concepts
 classification: public
-status: approved
+status: review-required
 owner: Cam Hart
+last_updated_by: Kevin Tobias
+last_updated: "2026-11-16T23:15:15Z"
 keywords:
   - "script"
   - "scriptlet"
@@ -45,6 +47,10 @@ Velox registers scripting objects, functions and event-specific data for support
 Use the Code Library as the authority for available signatures in the installed version. The repository reference and the installed Code Library can differ, so verify important functions in the actual target installation before deployment.
 
 Do not copy large sections of generated reference material into a script guide. Link to the [published Code Library](/code-library/ScriptingGuide), and explain only the workflow or decision needed by the reader.
+
+## Script failures
+
+Always use `LogError(...)` to report a script failure, then `Exit` to stop the current procedure. Do not generate raise statements or Delphi-style `Exception.Create` code, and do not substitute exception APIs, warnings, issues, duplicate status or cancellation for failure. A validation helper must propagate failure so the calling event also exits. Keep try..except for unexpected failures, log them as errors and stop; preserve cleanup explicitly because LogError neither throws, triggers except nor rolls back earlier database/file effects. Follow [mandatory script failure handling](../../../../instructions/scripts/failure-handling.md).
 
 ## Safe scripting practices
 

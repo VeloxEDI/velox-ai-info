@@ -5,6 +5,8 @@ sidebar_position: 4
 classification: public
 status: review-required
 owner: Cam Hart
+last_updated_by: Kevin Tobias
+last_updated: "2026-11-16T23:15:15Z"
 keywords: [velox, scripting, database, transaction]
 ---
 
@@ -17,22 +19,43 @@ procedure StartTransaction;
 procedure ScriptEvent(var Value: Variant);
 var
   Con: TvxDBCon;
+  Committed: Boolean;
 begin
   Con := DBCon;
   if Con = nil then
-    raise Exception.Create('No database connection is available');
-
-  Con.StartTransaction;
-  try
-    { Perform only the database work owned by this transaction boundary. }
-    Con.CommitTran;
-    Value := True;
-  except
-    Con.RollbackTran;
-    raise;
+  begin
+    LogError('No database connection is available.');
+    Exit;
   end;
+  Committed := False;
+  try
+    try
+      Con.StartTransaction;
+      { Perform only database work owned by this transaction boundary.
+        A known validation failure here must call LogError and Exit;
+        the finally block still attempts rollback before returning. }
+      Con.CommitTran;
+      Committed := True;
+    finally
+      if not Committed then
+      begin
+        try
+          Con.RollbackTran;
+        except
+          LogError('Rollback cleanup failed: ' + ExceptionToString(ExceptionType, ExceptionParam));
+        end;
+      end;
+    end;
+  except
+    LogError('Database work failed: ' + ExceptionToString(ExceptionType, ExceptionParam));
+    Exit;
+  end;
+  if not Committed then
+    Exit;
 end;
 ```
+
+Precondition: configuration/caller review has established ownership of this transaction boundary. StartTransaction alone does not prove ownership. The explicit finally cleanup runs on a local Exit as well as an unexpected failure; LogError itself triggers neither rollback nor the except handler.
 
 ### Usage
 

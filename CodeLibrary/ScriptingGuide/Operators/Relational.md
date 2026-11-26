@@ -3,8 +3,10 @@ title: "Relational (Comparison)"
 description: "Equality, ordering, membership and type comparisons in Velox expressions."
 sidebar_position: 3
 classification: public
-status: approved
+status: review-required
 owner: Cam Hart
+last_updated_by: Kevin Tobias
+last_updated: "2026-10-20T23:50:34Z"
 keywords:
   - velox
   - scripting
@@ -12,7 +14,9 @@ keywords:
   - comparison
 ---
 
-Relational operators compare values and normally return Boolean. Velox supports equality, ordering, set/array membership and class-type tests through the modified PascalScript runtime.
+Relational operators compare values and normally return Boolean. Supported operand combinations depend on the Velox-modified scripting engine; Delphi language validity alone is not proof of support.
+
+For generated scripts, follow the [scripting compatibility instructions](../../../instructions/scripts/compatibility.md). The reported inline character-set/range expression is unsupported; use explicit comparisons. Do not generalise that report into a ban on all sets or all uses of `in`. The implementation descriptions below are existing reference material, not a fresh compilation result for every expression form.
 
 ## Syntax
 
@@ -51,14 +55,14 @@ var
   Score: Integer;
 begin
   Score := 84;
-  if Score in [80..100] then
+  if (Score >= 80) and (Score <= 100) then
     Value := 'high'
   else
     Value := 'standard';
 end;
 ```
 
-The `in` expression returns true because `84` is a member of the constructed integer range set.
+The condition is true because `84` is within the inclusive range. Explicit comparisons avoid relying on an inline range constructor. This rewrite does not establish that integer-range membership is unsupported; no actual Velox compilation was performed for this update.
 
 ## Operator details
 

@@ -3,8 +3,10 @@ title: "try..except"
 description: "Exception interception and recovery blocks supported by Velox scripts."
 sidebar_position: 8
 classification: public
-status: approved
+status: review-required
 owner: Cam Hart
+last_updated_by: Kevin Tobias
+last_updated: "2026-11-16T23:15:15Z"
 keywords:
   - velox
   - scripting
@@ -12,7 +14,7 @@ keywords:
   - exceptions
 ---
 
-Use `try..except` to intercept a script-runtime exception raised while executing a protected statement sequence and run recovery code.
+Use `try..except` to intercept unexpected script-runtime failures. In generated Velox scripts, report failure using `LogError`, preserve necessary cleanup and explicitly stop/propagate failure; do not generate raise/rethrow statements. See [mandatory failure handling](../../../instructions/scripts/failure-handling.md).
 
 ## Syntax
 
@@ -44,18 +46,19 @@ procedure ScriptEvent(var Value: Variant);
 var
   Divisor: Integer;
 begin
-  Divisor := 0;
+  Divisor := 2;
   try
     Value := 100 div Divisor;
   except
-    Value := ExceptionParam;
+    LogError('Unexpected calculation failure: ' + ExceptionToString(ExceptionType, ExceptionParam));
+    Exit;
   end;
 end;
 ```
 
-The example handles the runtime division failure and exposes the runtime's exception parameter as the event result. In production logic, prefer validating an expected zero divisor before calculating; exception handling is for failures that cannot be handled more directly.
+The example uses a valid divisor and catches an unexpected runtime failure if one occurs. Validate predictable zero divisors before calculating: call `LogError` and `Exit` on failure. Logging alone does not transfer control into `except`; preserve cleanup on the explicit Exit path too.
 
-## Inspecting and re-raising
+## Inspecting exception state
 
 Within the handler, the registered functions provide diagnostic fields:
 
@@ -73,7 +76,7 @@ Do not expose internal exception text to an external party without considering w
 ## Common mistakes
 
 - Copying a Delphi typed handler (`on E: Exception do`) into a Velox script. The modified `ProcessTry` path does not parse typed `on` clauses.
-- Swallowing every failure without setting a clear result, logging through an approved host facility or re-raising. A bare handler marks the exception handled.
+- Swallowing a failure or returning a result without `LogError` and explicit stop/propagation. A bare handler marks the exception handled.
 - Using exceptions as ordinary branching for expected Null, empty or zero values. Test predictable conditions explicitly.
 - Assuming the handler rolls back dataset edits, file activity or module side effects completed before the failure. It changes control flow only.
 
@@ -88,7 +91,7 @@ Do not expose internal exception text to an external party without considering w
 
 ## Errors and side effects
 
-Missing `except`/`finally` or `end`, invalid handler syntax and unsafe cross-region jumps cause compilation errors. Runtime side effects completed before the exception remain unless the called API itself supplies a rollback contract. An exception in the handler propagates; use `RaiseLastException` when deliberately preserving the original VM failure.
+Missing `except`/`finally` or `end`, invalid handler syntax and unsafe cross-region jumps cause compilation errors. Runtime side effects completed before the exception remain unless the called API itself supplies a rollback contract. An unexpected exception in a handler can propagate. The rethrow API remains documented for interpreting existing code; generated-script handlers must use `LogError`, preserve cleanup explicitly and stop/propagate failure.
 
 ## Performance and concurrency
 

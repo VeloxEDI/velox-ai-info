@@ -5,6 +5,8 @@ sidebar_position: 1
 classification: public
 status: review-required
 owner: Cam Hart
+last_updated_by: Kevin Tobias
+last_updated: "2026-11-16T23:15:15Z"
 keywords: [velox, scripting, hidden-ancestor, data-definition, database-connection, first]
 ---
 
@@ -15,14 +17,32 @@ property DBCon: TvxDBCon read;
 ### Example
 
 ```Delphi
-procedure RequirePrimaryConnection(const Data: TvxDBDef);
+function RequirePrimaryConnection(const Data: TvxDBDef): Boolean;
+var
+  Con: TvxDBCon;
 begin
+  Result := False;
+  if Data = nil then
+  begin
+    LogError('No data definition is available.');
+    Exit;
+  end;
   if Data.DBConCount = 0 then
-    raise Exception.Create('No database connection is configured');
-  if Data.DBCon = nil then
-    raise Exception.Create('The primary database connection did not load');
+  begin
+    LogError('No database connection is configured.');
+    Exit;
+  end;
+  Con := Data.DBCon;
+  if Con = nil then
+  begin
+    LogError('The primary database connection did not load.');
+    Exit;
+  end;
+  Result := True;
 end;
 ```
+
+This helper returns `False` after logging failure. The calling event must check the result and `Exit` before doing further work; an `Exit` inside the helper does not exit its caller. Follow [mandatory script failure handling](../../../../../instructions/scripts/failure-handling.md).
 
 ### Usage
 

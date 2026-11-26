@@ -5,6 +5,8 @@ sidebar_position: 5
 classification: public
 status: review-required
 owner: Cam Hart
+last_updated_by: Kevin Tobias
+last_updated: "2026-11-16T23:15:15Z"
 keywords:
   - velox
   - scripting
@@ -21,17 +23,21 @@ function ExecShellCmdAndWait(const aCommand, aParams: string): DWORD;
 
 ### Example
 ```Delphi
-procedure ScriptEvent(var Value: variant);
+procedure ScriptEvent(var Value: Variant);
 var
   ExitCode: DWORD;
 begin
   ExitCode := ExecShellCmdAndWait('C:\Tools\Exporter.exe', '--daily');
-
   if ExitCode = 83569 then
-    raise Exception.Create('Windows did not start the exporter');
+  begin
+    LogError('Windows could not start the exporter process.');
+    Exit;
+  end;
   if ExitCode <> 0 then
-    raise Exception.Create('Exporter exit code: ' + IntToStr(ExitCode));
-
+  begin
+    LogError('Exporter exit code: ' + IntToStr(ExitCode));
+    Exit;
+  end;
   Value := 'Export complete';
 end;
 ```

@@ -5,6 +5,8 @@ sidebar_position: 1
 classification: public
 status: review-required
 owner: Cam Hart
+last_updated_by: Kevin Tobias
+last_updated: "2026-11-16T23:15:15Z"
 keywords: [velox, scripting, hidden-ancestor, tdataset, append, insert, edit-state]
 ---
 
@@ -15,18 +17,34 @@ procedure Append;
 ### Example
 
 ```Delphi
-procedure AddRecord(const Data: TvxClientDataSet);
+function AddRecord(const Data: TvxClientDataSet): Boolean;
+var
+  EditStarted: Boolean;
 begin
-  Data.Append;
+  Result := False;
+  EditStarted := False;
   try
+    Data.Append;
+    EditStarted := True;
     Data.FieldByName('Code').AsString := 'A100';
     Data.Post;
   except
-    Data.Cancel;
-    raise;
+    LogError('Dataset append failed: ' + ExceptionToString(ExceptionType, ExceptionParam));
+    if EditStarted then
+    begin
+      try
+        Data.Cancel;
+      except
+        LogError('Dataset cleanup failed: ' + ExceptionToString(ExceptionType, ExceptionParam));
+      end;
+    end;
+    Exit;
   end;
+  Result := True;
 end;
 ```
+
+This helper returns `False` after logging failure. The calling event must check the result and `Exit` before doing further work; an `Exit` inside the helper does not exit its caller. Follow [mandatory script failure handling](../../../../../instructions/scripts/failure-handling.md). Cancellation is explicit best-effort cleanup of this example's edit; it does not reverse a posted or committed external change.
 
 ### Usage
 

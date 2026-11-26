@@ -5,6 +5,8 @@ sidebar_position: 3
 classification: public
 status: review-required
 owner: Cam Hart
+last_updated_by: Kevin Tobias
+last_updated: "2026-11-16T23:15:15Z"
 keywords: [velox, scripting, hidden-ancestor, data-definition, database-link, indexed-property]
 ---
 
@@ -15,15 +17,36 @@ property DBCons[Index: Integer]: TvxDBLink read;
 ### Example
 
 ```Delphi
-procedure CheckConfiguredLinks(const Data: TvxDBDef);
+function CheckConfiguredLinks(const Data: TvxDBDef): Boolean;
 var
   I: Integer;
+  Link: TvxDBLink;
 begin
+  Result := False;
+  if Data = nil then
+  begin
+    LogError('No data definition is available.');
+    Exit;
+  end;
   for I := 0 to Data.DBConCount - 1 do
-    if Data.DBCons[I].DBCon = nil then
-      raise Exception.Create('Database connection ' + IntToStr(I) + ' did not load');
+  begin
+    Link := Data.DBCons[I];
+    if Link = nil then
+    begin
+      LogError('Database link ' + IntToStr(I) + ' is unavailable.');
+      Exit;
+    end;
+    if Link.DBCon = nil then
+    begin
+      LogError('Database connection ' + IntToStr(I) + ' did not load.');
+      Exit;
+    end;
+  end;
+  Result := True;
 end;
 ```
+
+This helper returns `False` after logging failure. The calling event must check the result and `Exit` before doing further work; an `Exit` inside the helper does not exit its caller. Follow [mandatory script failure handling](../../../../../instructions/scripts/failure-handling.md).
 
 ### Usage
 

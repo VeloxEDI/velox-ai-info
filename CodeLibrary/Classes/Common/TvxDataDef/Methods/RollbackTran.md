@@ -5,6 +5,8 @@ sidebar_position: 2
 classification: public
 status: review-required
 owner: Cam Hart
+last_updated_by: Kevin Tobias
+last_updated: "2026-11-16T23:15:15Z"
 keywords: [velox, scripting, hidden-ancestor, data-definition, transaction, rollback]
 ---
 
@@ -15,12 +17,24 @@ function RollbackTran: Boolean;
 ### Example
 
 ```Delphi
-procedure CancelDatabaseWork(const Data: TvxDBDef);
+function CancelDatabaseWork(const Data: TvxDBDef): Boolean;
 begin
+  Result := False;
+  if Data = nil then
+  begin
+    LogError('No data definition is available.');
+    Exit;
+  end;
   if not Data.RollbackTran then
-    raise Exception.Create('One or more database rollbacks failed');
+  begin
+    LogError('One or more database rollbacks failed.');
+    Exit;
+  end;
+  Result := True;
 end;
 ```
+
+This helper returns `False` after logging failure. The calling event must check the result and `Exit` before doing further work; an `Exit` inside the helper does not exit its caller. Follow [mandatory script failure handling](../../../../../instructions/scripts/failure-handling.md).
 
 ### Usage
 

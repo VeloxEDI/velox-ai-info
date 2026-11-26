@@ -5,6 +5,8 @@ sidebar_position: 5
 classification: public
 status: review-required
 owner: Cam Hart
+last_updated_by: Kevin Tobias
+last_updated: "2026-11-16T23:15:15Z"
 keywords:
   - velox
   - scripting
@@ -23,12 +25,14 @@ procedure ScriptEvent(var Value: variant);
 begin
   try
     OleCheck(-1); // A negative HRESULT represents failure.
-    Value := True;
   except
-    Value := False;
+    LogError('Operation failed: ' + ExceptionToString(ExceptionType, ExceptionParam));
+    Exit;
   end;
 end;
 ```
+
+Follow [mandatory script failure handling](../../../instructions/scripts/failure-handling.md): a caught failure is not a successful Boolean/message result; log it as an error and stop.
 
 ### Usage
 
@@ -59,7 +63,7 @@ Use this procedure immediately after the operation that produced the `HRESULT` s
 ### Additional Technical Info
 `OleCheck` tests a Windows `HRESULT` and raises an OLE system exception when the value represents failure. It is useful when a directly exposed or custom COM call returns a result code rather than raising automatically.
 
-The example is source-reviewed and is not executed by the documentation workflow. It uses a synthetic failure value and performs no COM activation or external I/O.
+The example reports the caught failure with LogError and Exit. This updated example was not compiled or executed in Velox. It uses a synthetic failure value and performs no COM activation or external I/O.
 
 **Implementation**
 

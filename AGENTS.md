@@ -8,11 +8,14 @@ The content is automatically synchronised from the private `velox-kb` repository
 
 ## Repository structure
 
-- `/codelibrary`
+- `/CodeLibrary`
   Velox scripting functions, procedures, examples, and reference documentation.
 
-- `/velox`
+- `/Velox`
   Velox product documentation, configuration guidance, concepts, and user documentation.
+
+- `/instructions`
+  Maintained authoring rules, with a shared rule file and an `AGENTS.md` entry point for each configuration type. This tree is outside the folders replaced by the current documentation sync.
 
 ## How agents should use this repository
 
@@ -29,7 +32,17 @@ When answering questions about Velox:
 
 Create Velox configuration files for the user to import.  Samples will be uploaded by the customer (at a later point samples will be provided in this repository).
 
-The `/velox` folder provides detailed information on all valid options for each configuration module of Velox.
+The `/Velox` folder provides detailed information on all valid options for each configuration module of Velox.
+
+Before generating, editing or reviewing configuration, read [the instruction catalogue](instructions/README.md) and [shared rules](instructions/common.md). Identify every configuration type involved, then explicitly open and follow its `AGENTS.md` and linked standards. Do this even when output files are outside this repository; nested instruction files must not be assumed to load automatically.
+
+Before delivering importable CFG files, follow [CFG import packaging](instructions/cfg-packaging.md) and [the AI-generation checklist](instructions/common.md#ai-generation-checklist). Distinguish the `TvxConfigTemplate` wrapper from real modules; use its canonical sentinel and active state, put the primary requested module first, and do not interpret disabled Processes as a requirement to disable every supporting module. Preserve native class/property names. Report static checks, successful import and native Test Compile separately; authored `CompiledStatus` never proves compilation.
+
+For Flow child-data references, follow [child-data binding guidance](instructions/flows/child-data-bindings.md) and run `node tools/check-cfg-bindings.mjs` on repository examples and `--root` for generated CFG output. Prefer unique native-style child component names with the verified native ownership layout. Action Source/Dest are unquoted references to actual Flow children, not Definition names or module FIDS. Verify Map, Transport and Custom Script bindings and expected classes. Reopen the imported Flow to confirm populated selections persist; report static, native import, compilation and execution results separately. The observed naming/binding correction was combined, not an independently proven universal naming requirement.
+
+For example, a Flow containing a Map action using DB Definitions/connections requires the Flow, action, Map, DB Definition and DB connection entry points. For Map field work, [instructions/maps/AGENTS.md](instructions/maps/AGENTS.md) requires [the field authoring standard](instructions/maps/field-authoring.md): intentionally unmapped fields have empty events and status `0`; meaningful events use status `1`. Report compilation/runtime testing separately from file inspection. Report unavailable instructions or conflicts rather than inventing rules.
+
+Keep type-specific rules in their `instructions/<type>/` folder and shared rules in `instructions/common.md`. Maintain the catalogue when adding types or standards. Synced product documentation remains the source for product behaviour; these files define authoring conventions and their evidence limits.
 
 ## Velox Scripting
 
@@ -37,8 +50,14 @@ Velox scripts use Pascal-style scripting.
 
 When generating scripts:
 
-- Follow patterns demonstrated in `/codelibrary`.
-- Reuse existing Velox helper functions where possible.
+- Read [the scripts entry point](instructions/scripts/AGENTS.md) and its required [helper](instructions/scripts/helpers.md) and [event Value](instructions/scripts/event-value-context.md) standards, including for scripts embedded in Maps, actions and Scriptlets.
+- For meaningful Map event scripts, follow [procedure-header context comments](instructions/maps/field-authoring.md#procedure-header-context-comments): actual destination dataset for view events, dataset.field for field events. Preserve comments and native signatures/bindings; intentionally unmapped events remain empty. The automatic field-comment observation is user-confirmed and does not guarantee exact event attribution in every error.
+- Read [scripting compatibility](instructions/scripts/compatibility.md). Use explicit comparisons instead of inline character-set/range membership such as `lTag[k] in ['A'..'Z', '/']`. Do not infer support from valid Delphi syntax or extrapolate this restriction to all sets or all uses of `in`. Extraction/static checks are not actual Velox compilation.
+- Follow [mandatory script failure handling](instructions/scripts/failure-handling.md): always report a script failure with `LogError` and stop with `Exit`; helpers must propagate failure to the event. Do not generate raise/rethrow statements, `Exception.Create` or exception APIs as substitutes. Preserve explicit cleanup and supported unexpected-failure handlers. Run `node tools/check-script-failures.mjs` on this repository and `--root` for generated output; this static check is not Velox compilation.
+- Follow recommended patterns in `/CodeLibrary`; clearly marked invalid, exception API reference-only and native Delphi examples are not generated-script templates.
+- Use documented managed helpers such as `Json`, `JsonArray` and `List` instead of manually constructing/freeing their corresponding workspaces. Never free a helper.
+- Follow [native field-helper guidance](instructions/scripts/field-helpers.md): prefer `TvxField.IsNullEmpty`/`NotNullEmpty` when their documented semantics match. Preserve exact-NULL and zero tests, and retain nonblank `AsString` output unless trimming is intended. Shorter code must not change business behaviour; no measured runtime benefit is claimed.
+- Do not append `Value := True` as a generic success footer. Identify the host: in File Router formulas it is a route predicate; preserve meaningful result handling in other contexts.
 - Do not invent Velox-specific functions.
 - Prefer simple, readable scripts suitable for use inside Velox Flow Script Events.
 - Typical Script Event entry points may look like:
@@ -48,3 +67,4 @@ procedure ScriptEvent(var Value: variant);
 begin
 
 end;
+```

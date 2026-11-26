@@ -5,6 +5,8 @@ sidebar_position: 6
 classification: public
 status: review-required
 owner: Cam Hart
+last_updated_by: Kevin Tobias
+last_updated: "2026-11-16T23:15:15Z"
 keywords: [velox, scripting, hidden-ancestor, tdataset, edit, insert, current-record]
 ---
 
@@ -15,18 +17,34 @@ procedure Edit;
 ### Example
 
 ```Delphi
-procedure ChangeStatus(const Data: TvxClientDataSet);
+function ChangeStatus(const Data: TvxClientDataSet): Boolean;
+var
+  EditStarted: Boolean;
 begin
-  Data.Edit;
+  Result := False;
+  EditStarted := False;
   try
+    Data.Edit;
+    EditStarted := True;
     Data.FieldByName('Status').AsString := 'Complete';
     Data.Post;
   except
-    Data.Cancel;
-    raise;
+    LogError('Dataset edit failed: ' + ExceptionToString(ExceptionType, ExceptionParam));
+    if EditStarted then
+    begin
+      try
+        Data.Cancel;
+      except
+        LogError('Dataset cleanup failed: ' + ExceptionToString(ExceptionType, ExceptionParam));
+      end;
+    end;
+    Exit;
   end;
+  Result := True;
 end;
 ```
+
+This helper returns `False` after logging failure. The calling event must check the result and `Exit` before doing further work; an `Exit` inside the helper does not exit its caller. Follow [mandatory script failure handling](../../../../../instructions/scripts/failure-handling.md). Cancellation is explicit best-effort cleanup of this example's edit; it does not reverse a posted or committed external change.
 
 ### Usage
 

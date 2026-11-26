@@ -5,6 +5,8 @@ sidebar_position: 3
 classification: public
 status: review-required
 owner: Cam Hart
+last_updated_by: Kevin Tobias
+last_updated: "2026-11-16T23:15:15Z"
 keywords: [velox, scripting, hidden-ancestor, data-definition, transaction, begin]
 ---
 
@@ -15,12 +17,26 @@ function StartTransaction: Boolean;
 ### Example
 
 ```Delphi
-procedure BeginDatabaseWork(const Data: TvxDBDef);
+function BeginDatabaseWork(const Data: TvxDBDef): Boolean;
 begin
+  Result := False;
+  if Data = nil then
+  begin
+    LogError('No data definition is available.');
+    Exit;
+  end;
   if not Data.StartTransaction then
-    raise Exception.Create('Not all database transactions could be started');
+  begin
+    LogError('Not all database transactions could be started.');
+    if not Data.RollbackTran then
+      LogError('Best-effort transaction rollback was incomplete.');
+    Exit;
+  end;
+  Result := True;
 end;
 ```
+
+This helper returns `False` after logging failure. The calling event must check the result and `Exit` before doing further work; an `Exit` inside the helper does not exit its caller. Follow [mandatory script failure handling](../../../../../instructions/scripts/failure-handling.md). Establish ownership of the transaction boundary before calling this example. Rollback is attempted explicitly on failure; it cannot undo earlier committed connections, and its result is checked separately.
 
 ### Usage
 

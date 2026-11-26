@@ -3,8 +3,10 @@ title: "Divide by Zero"
 description: "Why constant folding detected a zero divisor before the Velox script could compile."
 sidebar_position: 12
 classification: public
-status: approved
+status: review-required
 owner: Cam Hart
+last_updated_by: Kevin Tobias
+last_updated: "2026-11-16T23:15:15Z"
 keywords:
   - velox
   - scripting
@@ -34,7 +36,10 @@ For a dynamic divisor, validate the value at runtime:
 
 ```Delphi
 if Divisor = 0 then
-  RaiseException(erCustomError, 'Divisor must not be zero');
+begin
+  LogError('Divisor must not be zero.');
+  Exit;
+end;
 
 Value := Numerator div Divisor;
 ```
