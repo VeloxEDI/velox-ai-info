@@ -13,6 +13,9 @@ The content is automatically synchronised from the private `velox-kb` repository
 
 - `/Velox`
   Velox product documentation, configuration guidance, concepts, and user documentation.
+  
+- `/velox-uia`
+  Velox Designer information that is useful for UI automation.  
 
 - `/instructions`
   Maintained authoring rules, with a shared rule file and an `AGENTS.md` entry point for each configuration type. This tree is outside the folders replaced by the current documentation sync.
@@ -68,3 +71,10 @@ begin
 
 end;
 ```
+
+
+<!-- BEGIN VELOX UIA REFERENCE -->
+## Velox computer use (Velox-uai)
+
+Before operating Velox Designer, read [the UI accessibility reference](velox-uia/index.md), then find the relevant form in [the form index](velox-uia/forms.md). Read only the relevant pages. This is source-derived guidance, not a live accessibility snapshot. Confirm the database and Production/Test environment, and use current UI observations for element indexes, visibility, enabled state and action results. Never treat Delphi component names as AutomationIds or reuse saved runtime indexes.
+<!-- END VELOX UIA REFERENCE -->
