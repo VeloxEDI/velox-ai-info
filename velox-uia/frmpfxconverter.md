@@ -12,7 +12,7 @@ public_export: velox-uia
 
 # Convert PFX Certificate
 
-Read [Using this reference](index.md) before operating Velox. This page is source-derived and has not been checked against a running build.
+Read [Using this reference](index.md) before operating Velox. This table is source-derived. This form has not been inspected in the recorded runtime check; see [coverage and limits](runtime-checks.md#coverage-and-limits).
 
 - Form: `TPFXConverter`; base: `TForm`.
 - Source: `Forms/frmPFXConverter.dfm` and `Forms/frmPFXConverter.pas`.
@@ -23,7 +23,9 @@ Read [Using this reference](index.md) before operating Velox. This page is sourc
 
 Names below distinguish explicit automation names, labels referenced by NamedBy and DFM captions. These are source clues, not a guarantee of the runtime accessible name or supported UIA patterns. Inherited metadata is merged; descendant assignments override ancestor assignments.
 
-| AutomationId | Name or caption evidence | Component / class | Container / DFM state | Description | Source evidence |
+Editable child providers can expose a source base ID with an `.Input` suffix; see the [observed provider behaviour](runtime-checks.md#common-runtime-differences). Use the live tree rather than assuming every source ID is the actionable element.
+
+| Source AutomationId | Name or caption evidence | Component / class | Container / DFM state | Description | Source evidence |
 |---|---|---|---|---|---|
 | PFXConverter.edtFile | NamedBy labFile: PFX certificate file | edtFile / TcxTextEdit | Convert PFX Certificate / Properties.ReadOnly=True | PFX certificate file value for Convert PFX Certificate. | Forms/frmPFXConverter.pas:104 |
 | PFXConverter.edtPassword | NamedBy labPassword: PFX password | edtPassword / TcxTextEdit | Convert PFX Certificate / Properties.EchoMode=eemPassword | PFX password credential for Convert PFX Certificate. | Forms/frmPFXConverter.pas:110 |

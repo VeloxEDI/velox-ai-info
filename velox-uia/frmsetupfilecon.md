@@ -12,7 +12,7 @@ public_export: velox-uia
 
 # Setup File Endpoint
 
-Read [Using this reference](index.md) before operating Velox. This page is source-derived and has not been checked against a running build.
+Read [Using this reference](index.md) before operating Velox. This table is source-derived. Selected runtime states were inspected; read the [runtime observations and exact coverage](runtime-checks.md#frmsetupfilecon) for the checked build. Controls outside that stated coverage remain unverified.
 
 - Form: `TSetupFileCon`; base: [TfrmBaseEditForm](frmbaseeditform.md).
 - Source: `Forms/frmSetupFileCon.dfm` and `Forms/frmSetupFileCon.pas`.
@@ -23,7 +23,9 @@ Read [Using this reference](index.md) before operating Velox. This page is sourc
 
 Names below distinguish explicit automation names, labels referenced by NamedBy and DFM captions. These are source clues, not a guarantee of the runtime accessible name or supported UIA patterns. Inherited metadata is merged; descendant assignments override ancestor assignments.
 
-| AutomationId | Name or caption evidence | Component / class | Container / DFM state | Description | Source evidence |
+Editable child providers can expose a source base ID with an `.Input` suffix; see the [observed provider behaviour](runtime-checks.md#common-runtime-differences). Use the live tree rather than assuming every source ID is the actionable element.
+
+| Source AutomationId | Name or caption evidence | Component / class | Container / DFM state | Description | Source evidence |
 |---|---|---|---|---|---|
 | SetupFileCon.pcMain | Name: Setup File Endpoint tabs | pcMain / TcxPageControl | Setup File Endpoint | Select a page in Setup File Endpoint. | Forms/frmSetupFileCon.pas:310 |
 | SetupFileCon.tsGeneral | Caption: General | tsGeneral / TcxTabSheet | Setup File Endpoint | General page in Setup File Endpoint. | Forms/frmSetupFileCon.pas:313 |

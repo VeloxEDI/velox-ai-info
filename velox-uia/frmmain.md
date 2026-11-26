@@ -12,7 +12,7 @@ public_export: velox-uia
 
 # Velox Designer
 
-Read [Using this reference](index.md) before operating Velox. This page is source-derived and has not been checked against a running build.
+Read [Using this reference](index.md) before operating Velox. This table is source-derived. Selected runtime states were inspected; read the [runtime observations and exact coverage](runtime-checks.md#frmmain) for the checked build. Controls outside that stated coverage remain unverified.
 
 - Form: `TMain`; base: `TForm`.
 - Source: `Forms/frmMain.dfm` and `Forms/frmMain.pas`.
@@ -23,21 +23,23 @@ Read [Using this reference](index.md) before operating Velox. This page is sourc
 
 Names below distinguish explicit automation names, labels referenced by NamedBy and DFM captions. These are source clues, not a guarantee of the runtime accessible name or supported UIA patterns. Inherited metadata is merged; descendant assignments override ancestor assignments.
 
-| AutomationId | Name or caption evidence | Component / class | Container / DFM state | Description | Source evidence |
+Editable child providers can expose a source base ID with an `.Input` suffix; see the [observed provider behaviour](runtime-checks.md#common-runtime-differences). Use the live tree rather than assuming every source ID is the actionable element.
+
+| Source AutomationId | Name or caption evidence | Component / class | Container / DFM state | Description | Source evidence |
 |---|---|---|---|---|---|
-| Navigation.GeneralSetup | Name: General Setup | btnFooterSetup / TcxButton | Velox Designer | Open General Setup for the current environment. | Forms/frmMain.pas:2699 |
-| Navigation.WorkspaceTabs | Name: Open workspace tabs | MainTab / TChromeTabs | Velox Designer | Select an open module, editor or management window. | Forms/frmMain.pas:2666 |
-| Navigation.ProductionTree | Name: Production navigation | ProdTree / TvxFastTreeView | Velox Designer / Visible=False | Production modules and folders. Invoke, single click or press Enter to activate a row; expand folders to browse. | Forms/frmMain.pas:2672 |
-| Navigation.TestTree | Name: Test navigation | TestTree / TvxFastTreeView | Velox Designer / Visible=False | Test modules and folders. Invoke, single click or press Enter to activate a row; expand folders to browse. | Forms/frmMain.pas:2682 |
-| Navigation.Search | Name: Search navigation | edtSearchText / TvxMRUComboBox | Velox Designer | Search navigation modules by name. Enter searches the database; Ctrl+Enter loads and searches the full navigation tree. | Forms/frmMain.pas:2691 |
-| Navigation.Environment | Name: Environment | toggleMode / TdxToggleSwitch | Velox Designer / Properties.ReadOnly=False | Switch between Production and Test configuration environments. | Forms/frmMain.pas:2695 |
-| Navigation.Logs | Caption: Logs | btnFooterLogs / TcxButton | Velox Designer | Open logs for the current environment. | Forms/frmMain.pas:2702 |
-| Navigation.ConfigurationDatabase | Name: Configuration database | cbConfigDatabase / TcxComboBox | Velox Designer / Visible=False | Select the configuration database connection. | Forms/frmMain.pas:2705 |
-| Navigation.Restore | Name: Restore navigation | btnRestore / TcxImage | Velox Designer / Visible=False | Restore the navigation panel. | Forms/frmMain.pas:2709 |
+| Navigation.GeneralSetup | Name: General Setup | btnFooterSetup / TcxButton | Velox Designer | Open General Setup for the current environment. | Forms/frmMain.pas:2756 |
+| Navigation.WorkspaceTabs | Name: Open workspace tabs | MainTab / TChromeTabs | Velox Designer | Select an open module, editor or management window. | Forms/frmMain.pas:2723 |
+| Navigation.ProductionTree | Name: Production navigation | ProdTree / TvxFastTreeView | Velox Designer / Visible=False | Production modules and folders. Invoke, single click or press Enter to activate a row; expand folders to browse. | Forms/frmMain.pas:2729 |
+| Navigation.TestTree | Name: Test navigation | TestTree / TvxFastTreeView | Velox Designer / Visible=False | Test modules and folders. Invoke, single click or press Enter to activate a row; expand folders to browse. | Forms/frmMain.pas:2739 |
+| Navigation.Search | Name: Search navigation | edtSearchText / TvxMRUComboBox | Velox Designer | Search navigation modules by name. Enter searches the database; Ctrl+Enter loads and searches the full navigation tree. | Forms/frmMain.pas:2748 |
+| Navigation.Environment | Name: Environment | toggleMode / TdxToggleSwitch | Velox Designer / Properties.ReadOnly=False | Switch between Production and Test configuration environments. | Forms/frmMain.pas:2752 |
+| Navigation.Logs | Caption: Logs | btnFooterLogs / TcxButton | Velox Designer | Open logs for the current environment. | Forms/frmMain.pas:2759 |
+| Navigation.ConfigurationDatabase | Name: Configuration database | cbConfigDatabase / TcxComboBox | Velox Designer / Visible=False | Select the configuration database connection. | Forms/frmMain.pas:2762 |
+| Navigation.Restore | Name: Restore navigation | btnRestore / TcxImage | Velox Designer / Visible=False | Restore the navigation panel. | Forms/frmMain.pas:2766 |
 
 ## Dynamic items
 
-- Tab ID prefix `Navigation.WorkspaceTab`: Select this open workspace window. Actual IDs are created at runtime; do not cache them. Evidence: `Forms/frmMain.pas:2669`.
+- Tab ID prefix `Navigation.WorkspaceTab`: Select this open workspace window. Actual IDs are created at runtime; do not cache them. Evidence: `Forms/frmMain.pas:2726`.
 
 ## Other controls and commands
 
@@ -182,4 +184,4 @@ These controls have no explicit automation assignment in the extracted form hier
 SHA-256 of each source file used for this page, including inherited forms. These identify the inspected working-tree contents, which may include changes newer than the installed executable. Regenerate after changing forms or automation metadata.
 
 - `Forms/frmMain.dfm`: `2134b2057085185a6149f18d65f1d4380e9219bb682d12c6d3bbd1d2c667e038`.
-- `Forms/frmMain.pas`: `36fb5107e2e56f0d1e3f9bbff6a48754176f578e9d349e911341c8365b8bf533`.
+- `Forms/frmMain.pas`: `1dc3406f4a531e300cbfad89bc564eade169261936a68470e88c374d4f29e631`.

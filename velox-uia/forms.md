@@ -14,94 +14,96 @@ public_export: velox-uia
 
 87 forms and 2064 effective metadata entries (including inherited entries). Read [Using this reference](index.md) first. Search this folder by caption, component name or AutomationId, then read only the relevant form page.
 
+10 forms have [runtime observations](runtime-checks.md); each observation covers only its stated build and selected states. Source regeneration does not repeat those live checks. All other forms remain uninspected.
+
 Scope: text DFM resources and paired Pascal units under Velox Forms, excluding Action, LinkedAction, history and recovery folders. Vendor code, trial applications, runtime-only controls without extracted metadata and separate utilities are outside this inventory. A form in this index is not proof of an active menu entry or installed-build availability.
 
-| Form caption | Delphi class | DFM source | Metadata entries |
-|---|---|---|---|
-| [Replace text](dlgreplacetext.md) | TTextReplaceDialog | Forms/dlgReplaceText.dfm | 13 |
-| [Search Text](dlgsearchtext.md) | TTextSearchDialog | Forms/dlgSearchText.dfm | 11 |
-| [About Velox](frmaboutvelox.md) | TAboutVelox | Forms/frmAboutVelox.dfm | 10 |
-| [frmBaseEditDesignerForm](frmbaseeditdesignerform.md) | TfrmBaseEditDesignerForm | Forms/frmBaseEditDesignerForm.dfm | 4 |
-| [frmBaseEditForm](frmbaseeditform.md) | TfrmBaseEditForm | Forms/frmBaseEditForm.dfm | 4 |
-| [frmBaseForm](frmbaseform.md) | TfrmBaseForm | Forms/frmBaseForm.dfm | 0 |
-| [frmBaseViewForm](frmbaseviewform.md) | TfrmBaseViewForm | Forms/frmBaseViewForm.dfm | 0 |
-| [Generate Self-Signed Server Certificate](frmcertificategenerator.md) | TCertificateGenerator | Forms/frmCertificateGenerator.dfm | 14 |
-| [Module being used](frmcheckusage.md) | TCheckUsage | Forms/frmCheckUsage.dfm | 5 |
-| [Code Library](frmcodelibrary.md) | TCodeLibrary | Forms/frmCodeLibrary.dfm | 10 |
-| [Configuration GIT](frmconfiggittools.md) | TConfigGitTools | Forms/frmConfigGitTools.dfm | 7 |
-| [Sync Config to GIT folder](frmconfigsync.md) | TConfigSync | Forms/frmConfigSync.dfm | 7 |
-| [Import Velox Configuration Template](frmconfigtemplateimporter.md) | TConfigTemplateImporter | Forms/frmConfigTemplateImporter.dfm | 3 |
-| [Module being deleted](frmconfirmdeleteusedmodule.md) | TConfirmDeleteUsedModule | Forms/frmConfirmDeleteUsedModule.dfm | 4 |
-| [Create File Connection Folders](frmcreatefolders.md) | TCreateFolders | Forms/frmCreateFolders.dfm | 6 |
-| [Create XSD from XML](frmcreatexsd.md) | TvxCreateXSD | Forms/frmCreateXSD.dfm | 13 |
-| [Import Fields](frmcsvimporter.md) | TfrmCSVImporter | Forms/frmCSVImporter.dfm | 11 |
-| [Database Explorer](frmdatabaseexplorer.md) | TDatabaseExplorer | Forms/frmDatabaseExplorer.dfm | 17 |
-| [Database Update Required](frmdatabaseupgrade.md) | TDatabaseUpgrade | Forms/frmDatabaseUpgrade.dfm | 15 |
-| [Email Progress](frmemailprogress.md) | TEmailProgress | Forms/frmEmailProgress.dfm | 4 |
-| [File Search](frmfilesearch.md) | TFileSearch | Forms/frmFileSearch.dfm | 15 |
-| [Velox Licensing](frmlicensing.md) | TLicensing | Forms/frmLicensing.dfm | 38 |
-| [Log](frmlogs.md) | TLogs | Forms/frmLogs.dfm | 83 |
-| [Velox Designer](frmmain.md) | TMain | Forms/frmMain.dfm | 9 |
-| [Manage Flows](frmmanageactions.md) | TManageActions | Forms/frmManageActions.dfm | 23 |
-| [Manage Logs](frmmanagelogs.md) | TManageLogs | Forms/frmManageLogs.dfm | 47 |
-| [Manage Maps](frmmanagemaps.md) | TManageMaps | Forms/frmManageMaps.dfm | 31 |
-| [Manage Transport Logs](frmmanagetransportlogs.md) | TManageTransportLogs | Forms/frmManageTransportLogs.dfm | 38 |
-| [Manage Transports](frmmanagetransports.md) | TManageTransports | Forms/frmManageTransports.dfm | 21 |
-| [Add Token](frmmcptoken.md) | TMCPToken | Forms/frmMCPToken.dfm | 3 |
-| [Updating Modules](frmmoduleswitch.md) | TModuleSwitch | Forms/frmModuleSwitch.dfm | 11 |
-| [Synchronise Module Relations](frmmodulesync.md) | TModuleSync | Forms/frmModuleSync.dfm | 6 |
-| [Updating Modules](frmmoduleupdate.md) | TModuleUpdate | Forms/frmModuleUpdate.dfm | 7 |
-| [New Private Key](frmnamer.md) | TvxNamer | Forms/frmNamer.dfm | 9 |
-| [Convert PFX Certificate](frmpfxconverter.md) | TPFXConverter | Forms/frmPFXConverter.dfm | 6 |
-| [Random Generator](frmrandomize.md) | TvxRandomize | Forms/frmRandomize.dfm | 2 |
-| [Script Editor](frmscripteditor.md) | TScriptEditor | Forms/frmScriptEditor.dfm | 7 |
-| [Select Schema Element](frmselectschemaelement.md) | TSelectSchemaElement | Forms/frmSelectSchemaElement.dfm | 2 |
-| [Please enter your password](frmservicepassword.md) | TvxServicePassword | Forms/frmServicePassword.dfm | 7 |
-| [Setup Flow](frmsetupactions.md) | TSetupActions | Forms/frmSetupActions.dfm | 172 |
-| [Setup AI Prompt](frmsetupaiprompt.md) | TSetupAIPrompt | Forms/frmSetupAIPrompt.dfm | 24 |
-| [Setup API](frmsetupapi.md) | TSetupAPI | Forms/frmSetupAPI.dfm | 48 |
-| [Setup DB Endpoint](frmsetupdbcon.md) | TSetupDBCon | Forms/frmSetupDBCon.dfm | 48 |
-| [Setup DB Definition](frmsetupdbdefs.md) | TSetupDBDef | Forms/frmSetupDBDefs.dfm | 20 |
-| [Setup File Endpoint](frmsetupfilecon.md) | TSetupFileCon | Forms/frmSetupFileCon.dfm | 42 |
-| [Setup EDI File Definition](frmsetupfiledefedi.md) | TSetupFileDefEDI | Forms/frmSetupFileDefEDI.dfm | 44 |
-| [Setup Excel File Definition](frmsetupfiledefexcel.md) | TSetupFileDefExcel | Forms/frmSetupFileDefExcel.dfm | 32 |
-| [Setup Flat File Definition](frmsetupfiledefflat.md) | TSetupFileDefFlat | Forms/frmSetupFileDefFlat.dfm | 55 |
-| [Setup JSON File Definition](frmsetupfiledefjson.md) | TSetupFileDefJSON | Forms/frmSetupFileDefJSON.dfm | 30 |
-| [Setup XML File Definitions](frmsetupfiledefxml.md) | TSetupFileDefXML | Forms/frmSetupFileDefXML.dfm | 44 |
-| [Setup Folder](frmsetupfolder.md) | TSetupFolder | Forms/frmSetupFolder.dfm | 28 |
-| [General Setup](frmsetupgeneral.md) | TSetupGeneral | Forms/frmSetupGeneral.dfm | 204 |
-| [Configure Map Script](frmsetupmapdesign.md) | TSetupMapDesign | Forms/frmSetupMapDesign.dfm | 14 |
-| [Setup Maps](frmsetupmaps.md) | TSetupMaps | Forms/frmSetupMaps.dfm | 21 |
-| [Setup Parameter](frmsetupparams.md) | TSetupParam | Forms/frmSetupParams.dfm | 10 |
-| [Setup Reports](frmsetupreports.md) | TSetupReports | Forms/frmSetupReports.dfm | 22 |
-| [Setup Scriptlet](frmsetupscriptlet.md) | TSetupScriptlet | Forms/frmSetupScriptlet.dfm | 16 |
-| [SQL Script](frmsetupsqlscript.md) | TSetupSQLScript | Forms/frmSetupSQLScript.dfm | 25 |
-| [Setup File Endpoint](frmsetupvariablegroup.md) | TSetupVariableGroup | Forms/frmSetupVariableGroup.dfm | 21 |
-| [SSL Settings](frmsslsettings.md) | TSSLSettings | Forms/frmSSLSettings.dfm | 22 |
-| [frmTabViewer](frmtabviewer.md) | TfrmTabViewer | Forms/frmTabViewer.dfm | 1 |
-| [Unused Modules](frmunusedmodules.md) | TUnusedModules | Forms/frmUnusedModules.dfm | 7 |
-| [Update passwords](frmupdatepasswords.md) | TvxUpdatePasswords | Forms/frmUpdatePasswords.dfm | 6 |
-| [Create transports on flows](frmupdatetransports.md) | TvxUpdateTransports | Forms/frmUpdateTransports.dfm | 6 |
-| [Action Cache](frmviewactioncache.md) | TViewActionCache | Forms/frmViewActionCache.dfm | 6 |
-| [DB Con Connections](frmviewdbcons.md) | TViewDBCons | Forms/frmViewDBCons.dfm | 6 |
-| [Form Cache](frmviewformcache.md) | TViewFormCache | Forms/frmViewFormCache.dfm | 5 |
-| [Module Cache](frmviewmodulecache.md) | TViewModuleCache | Forms/frmViewModuleCache.dfm | 5 |
-| [View Processes](frmviewprocesses.md) | TViewProcesses | Forms/frmViewProcesses.dfm | 23 |
-| [System Connections](frmviewsyscons.md) | TViewSysCons | Forms/frmViewSysCons.dfm | 6 |
-| [Transport Cache](frmviewtransportcache.md) | TViewTransportCache | Forms/frmViewTransportCache.dfm | 6 |
-| [Select Schema Root Node](frmxmlschemaitemselect.md) | TXMLSchemaItemSelect | Forms/frmXMLSchemaItemSelect.dfm | 3 |
-| [Setup FTP Transport](frmtransportftpin.md) | TfrmTransportFTPIn | Forms/Transports/frmTransportFTPIn.dfm | 43 |
-| [Setup FTP Transport](frmtransportftpout.md) | TfrmTransportFTPOut | Forms/Transports/frmTransportFTPOut.dfm | 44 |
-| [Setup HTTP Transport](frmtransporthttpin.md) | TfrmTransportHTTPIn | Forms/Transports/frmTransportHTTPIn.dfm | 51 |
-| [Setup HTTP Transport](frmtransporthttpout.md) | TfrmTransportHTTPOut | Forms/Transports/frmTransportHTTPOut.dfm | 57 |
-| [Setup IBM MQ Transport](frmtransportibmmqin.md) | TfrmTransportIBMMQIn | Forms/Transports/frmTransportIBMMQIn.dfm | 19 |
-| [Setup IBM MQ Transport](frmtransportibmmqout.md) | TfrmTransportIBMMQOut | Forms/Transports/frmTransportIBMMQOut.dfm | 23 |
-| [Setup IMAP Transport](frmtransportimap.md) | TfrmTransportIMAP | Forms/Transports/frmTransportIMAP.dfm | 46 |
-| [Setup LAN Transport](frmtransportlanin.md) | TfrmTransportLANIn | Forms/Transports/frmTransportLANIn.dfm | 20 |
-| [Setup LAN Transport](frmtransportlanout.md) | TfrmTransportLANOut | Forms/Transports/frmTransportLANOut.dfm | 18 |
-| [Setup MSMQ In Transport](frmtransportmsmqin.md) | TfrmTransportMSMQIn | Forms/Transports/frmTransportMSMQIn.dfm | 27 |
-| [Setup MSMQ Out Transport](frmtransportmsmqout.md) | TfrmTransportMSMQOut | Forms/Transports/frmTransportMSMQOut.dfm | 27 |
-| [Setup POP Transport](frmtransportpop.md) | TfrmTransportPOP | Forms/Transports/frmTransportPOP.dfm | 30 |
-| [Setup SFTP Transport](frmtransportsftpin.md) | TfrmTransportSFTPIn | Forms/Transports/frmTransportSFTPIn.dfm | 40 |
-| [Setup SFTP Transport](frmtransportsftpout.md) | TfrmTransportSFTPOut | Forms/Transports/frmTransportSFTPOut.dfm | 43 |
-| [Setup SMTP Transport](frmtransportsmtp.md) | TfrmTransportSMTP | Forms/Transports/frmTransportSMTP.dfm | 31 |
+| Form caption | Delphi class | DFM source | Metadata entries | Runtime observation scope |
+|---|---|---|---|---|
+| [Replace text](dlgreplacetext.md) | TTextReplaceDialog | Forms/dlgReplaceText.dfm | 13 | Not inspected |
+| [Search Text](dlgsearchtext.md) | TTextSearchDialog | Forms/dlgSearchText.dfm | 11 | Not inspected |
+| [About Velox](frmaboutvelox.md) | TAboutVelox | Forms/frmAboutVelox.dfm | 10 | [Selected states inspected](runtime-checks.md#frmaboutvelox) |
+| [frmBaseEditDesignerForm](frmbaseeditdesignerform.md) | TfrmBaseEditDesignerForm | Forms/frmBaseEditDesignerForm.dfm | 4 | Not inspected |
+| [frmBaseEditForm](frmbaseeditform.md) | TfrmBaseEditForm | Forms/frmBaseEditForm.dfm | 4 | Not inspected |
+| [frmBaseForm](frmbaseform.md) | TfrmBaseForm | Forms/frmBaseForm.dfm | 0 | Not inspected |
+| [frmBaseViewForm](frmbaseviewform.md) | TfrmBaseViewForm | Forms/frmBaseViewForm.dfm | 0 | Not inspected |
+| [Generate Self-Signed Server Certificate](frmcertificategenerator.md) | TCertificateGenerator | Forms/frmCertificateGenerator.dfm | 14 | Not inspected |
+| [Module being used](frmcheckusage.md) | TCheckUsage | Forms/frmCheckUsage.dfm | 5 | Not inspected |
+| [Code Library](frmcodelibrary.md) | TCodeLibrary | Forms/frmCodeLibrary.dfm | 10 | [Selected states inspected](runtime-checks.md#frmcodelibrary) |
+| [Configuration GIT](frmconfiggittools.md) | TConfigGitTools | Forms/frmConfigGitTools.dfm | 7 | Not inspected |
+| [Sync Config to GIT folder](frmconfigsync.md) | TConfigSync | Forms/frmConfigSync.dfm | 7 | Not inspected |
+| [Import Velox Configuration Template](frmconfigtemplateimporter.md) | TConfigTemplateImporter | Forms/frmConfigTemplateImporter.dfm | 3 | Not inspected |
+| [Module being deleted](frmconfirmdeleteusedmodule.md) | TConfirmDeleteUsedModule | Forms/frmConfirmDeleteUsedModule.dfm | 4 | Not inspected |
+| [Create File Connection Folders](frmcreatefolders.md) | TCreateFolders | Forms/frmCreateFolders.dfm | 6 | Not inspected |
+| [Create XSD from XML](frmcreatexsd.md) | TvxCreateXSD | Forms/frmCreateXSD.dfm | 13 | [Selected states inspected](runtime-checks.md#frmcreatexsd) |
+| [Import Fields](frmcsvimporter.md) | TfrmCSVImporter | Forms/frmCSVImporter.dfm | 11 | Not inspected |
+| [Database Explorer](frmdatabaseexplorer.md) | TDatabaseExplorer | Forms/frmDatabaseExplorer.dfm | 17 | Not inspected |
+| [Database Update Required](frmdatabaseupgrade.md) | TDatabaseUpgrade | Forms/frmDatabaseUpgrade.dfm | 15 | Not inspected |
+| [Email Progress](frmemailprogress.md) | TEmailProgress | Forms/frmEmailProgress.dfm | 4 | Not inspected |
+| [File Search](frmfilesearch.md) | TFileSearch | Forms/frmFileSearch.dfm | 15 | [Selected states inspected](runtime-checks.md#frmfilesearch) |
+| [Velox Licensing](frmlicensing.md) | TLicensing | Forms/frmLicensing.dfm | 38 | Not inspected |
+| [Log](frmlogs.md) | TLogs | Forms/frmLogs.dfm | 83 | Not inspected |
+| [Velox Designer](frmmain.md) | TMain | Forms/frmMain.dfm | 9 | [Selected states inspected](runtime-checks.md#frmmain) |
+| [Manage Flows](frmmanageactions.md) | TManageActions | Forms/frmManageActions.dfm | 23 | Not inspected |
+| [Manage Logs](frmmanagelogs.md) | TManageLogs | Forms/frmManageLogs.dfm | 47 | [Selected states inspected](runtime-checks.md#frmmanagelogs) |
+| [Manage Maps](frmmanagemaps.md) | TManageMaps | Forms/frmManageMaps.dfm | 31 | Not inspected |
+| [Manage Transport Logs](frmmanagetransportlogs.md) | TManageTransportLogs | Forms/frmManageTransportLogs.dfm | 38 | Not inspected |
+| [Manage Transports](frmmanagetransports.md) | TManageTransports | Forms/frmManageTransports.dfm | 21 | Not inspected |
+| [Add Token](frmmcptoken.md) | TMCPToken | Forms/frmMCPToken.dfm | 3 | Not inspected |
+| [Updating Modules](frmmoduleswitch.md) | TModuleSwitch | Forms/frmModuleSwitch.dfm | 11 | Not inspected |
+| [Synchronise Module Relations](frmmodulesync.md) | TModuleSync | Forms/frmModuleSync.dfm | 6 | Not inspected |
+| [Updating Modules](frmmoduleupdate.md) | TModuleUpdate | Forms/frmModuleUpdate.dfm | 7 | Not inspected |
+| [New Private Key](frmnamer.md) | TvxNamer | Forms/frmNamer.dfm | 9 | Not inspected |
+| [Convert PFX Certificate](frmpfxconverter.md) | TPFXConverter | Forms/frmPFXConverter.dfm | 6 | Not inspected |
+| [Random Generator](frmrandomize.md) | TvxRandomize | Forms/frmRandomize.dfm | 2 | Not inspected |
+| [Script Editor](frmscripteditor.md) | TScriptEditor | Forms/frmScriptEditor.dfm | 7 | Not inspected |
+| [Select Schema Element](frmselectschemaelement.md) | TSelectSchemaElement | Forms/frmSelectSchemaElement.dfm | 2 | Not inspected |
+| [Please enter your password](frmservicepassword.md) | TvxServicePassword | Forms/frmServicePassword.dfm | 7 | Not inspected |
+| [Setup Flow](frmsetupactions.md) | TSetupActions | Forms/frmSetupActions.dfm | 172 | [Selected states inspected](runtime-checks.md#frmsetupactions) |
+| [Setup AI Prompt](frmsetupaiprompt.md) | TSetupAIPrompt | Forms/frmSetupAIPrompt.dfm | 24 | Not inspected |
+| [Setup API](frmsetupapi.md) | TSetupAPI | Forms/frmSetupAPI.dfm | 48 | Not inspected |
+| [Setup DB Endpoint](frmsetupdbcon.md) | TSetupDBCon | Forms/frmSetupDBCon.dfm | 48 | [Selected states inspected](runtime-checks.md#frmsetupdbcon) |
+| [Setup DB Definition](frmsetupdbdefs.md) | TSetupDBDef | Forms/frmSetupDBDefs.dfm | 20 | Not inspected |
+| [Setup File Endpoint](frmsetupfilecon.md) | TSetupFileCon | Forms/frmSetupFileCon.dfm | 42 | [Selected states inspected](runtime-checks.md#frmsetupfilecon) |
+| [Setup EDI File Definition](frmsetupfiledefedi.md) | TSetupFileDefEDI | Forms/frmSetupFileDefEDI.dfm | 44 | Not inspected |
+| [Setup Excel File Definition](frmsetupfiledefexcel.md) | TSetupFileDefExcel | Forms/frmSetupFileDefExcel.dfm | 32 | Not inspected |
+| [Setup Flat File Definition](frmsetupfiledefflat.md) | TSetupFileDefFlat | Forms/frmSetupFileDefFlat.dfm | 55 | Not inspected |
+| [Setup JSON File Definition](frmsetupfiledefjson.md) | TSetupFileDefJSON | Forms/frmSetupFileDefJSON.dfm | 30 | Not inspected |
+| [Setup XML File Definitions](frmsetupfiledefxml.md) | TSetupFileDefXML | Forms/frmSetupFileDefXML.dfm | 44 | Not inspected |
+| [Setup Folder](frmsetupfolder.md) | TSetupFolder | Forms/frmSetupFolder.dfm | 28 | Not inspected |
+| [General Setup](frmsetupgeneral.md) | TSetupGeneral | Forms/frmSetupGeneral.dfm | 204 | [Selected states inspected](runtime-checks.md#frmsetupgeneral) |
+| [Configure Map Script](frmsetupmapdesign.md) | TSetupMapDesign | Forms/frmSetupMapDesign.dfm | 14 | Not inspected |
+| [Setup Maps](frmsetupmaps.md) | TSetupMaps | Forms/frmSetupMaps.dfm | 21 | Not inspected |
+| [Setup Parameter](frmsetupparams.md) | TSetupParam | Forms/frmSetupParams.dfm | 10 | Not inspected |
+| [Setup Reports](frmsetupreports.md) | TSetupReports | Forms/frmSetupReports.dfm | 22 | Not inspected |
+| [Setup Scriptlet](frmsetupscriptlet.md) | TSetupScriptlet | Forms/frmSetupScriptlet.dfm | 16 | Not inspected |
+| [SQL Script](frmsetupsqlscript.md) | TSetupSQLScript | Forms/frmSetupSQLScript.dfm | 25 | Not inspected |
+| [Setup File Endpoint](frmsetupvariablegroup.md) | TSetupVariableGroup | Forms/frmSetupVariableGroup.dfm | 21 | Not inspected |
+| [SSL Settings](frmsslsettings.md) | TSSLSettings | Forms/frmSSLSettings.dfm | 22 | Not inspected |
+| [frmTabViewer](frmtabviewer.md) | TfrmTabViewer | Forms/frmTabViewer.dfm | 1 | Not inspected |
+| [Unused Modules](frmunusedmodules.md) | TUnusedModules | Forms/frmUnusedModules.dfm | 7 | Not inspected |
+| [Update passwords](frmupdatepasswords.md) | TvxUpdatePasswords | Forms/frmUpdatePasswords.dfm | 6 | Not inspected |
+| [Create transports on flows](frmupdatetransports.md) | TvxUpdateTransports | Forms/frmUpdateTransports.dfm | 6 | Not inspected |
+| [Action Cache](frmviewactioncache.md) | TViewActionCache | Forms/frmViewActionCache.dfm | 6 | Not inspected |
+| [DB Con Connections](frmviewdbcons.md) | TViewDBCons | Forms/frmViewDBCons.dfm | 6 | Not inspected |
+| [Form Cache](frmviewformcache.md) | TViewFormCache | Forms/frmViewFormCache.dfm | 5 | Not inspected |
+| [Module Cache](frmviewmodulecache.md) | TViewModuleCache | Forms/frmViewModuleCache.dfm | 5 | Not inspected |
+| [View Processes](frmviewprocesses.md) | TViewProcesses | Forms/frmViewProcesses.dfm | 23 | Not inspected |
+| [System Connections](frmviewsyscons.md) | TViewSysCons | Forms/frmViewSysCons.dfm | 6 | Not inspected |
+| [Transport Cache](frmviewtransportcache.md) | TViewTransportCache | Forms/frmViewTransportCache.dfm | 6 | Not inspected |
+| [Select Schema Root Node](frmxmlschemaitemselect.md) | TXMLSchemaItemSelect | Forms/frmXMLSchemaItemSelect.dfm | 3 | Not inspected |
+| [Setup FTP Transport](frmtransportftpin.md) | TfrmTransportFTPIn | Forms/Transports/frmTransportFTPIn.dfm | 43 | Not inspected |
+| [Setup FTP Transport](frmtransportftpout.md) | TfrmTransportFTPOut | Forms/Transports/frmTransportFTPOut.dfm | 44 | Not inspected |
+| [Setup HTTP Transport](frmtransporthttpin.md) | TfrmTransportHTTPIn | Forms/Transports/frmTransportHTTPIn.dfm | 51 | Not inspected |
+| [Setup HTTP Transport](frmtransporthttpout.md) | TfrmTransportHTTPOut | Forms/Transports/frmTransportHTTPOut.dfm | 57 | Not inspected |
+| [Setup IBM MQ Transport](frmtransportibmmqin.md) | TfrmTransportIBMMQIn | Forms/Transports/frmTransportIBMMQIn.dfm | 19 | Not inspected |
+| [Setup IBM MQ Transport](frmtransportibmmqout.md) | TfrmTransportIBMMQOut | Forms/Transports/frmTransportIBMMQOut.dfm | 23 | Not inspected |
+| [Setup IMAP Transport](frmtransportimap.md) | TfrmTransportIMAP | Forms/Transports/frmTransportIMAP.dfm | 46 | Not inspected |
+| [Setup LAN Transport](frmtransportlanin.md) | TfrmTransportLANIn | Forms/Transports/frmTransportLANIn.dfm | 20 | Not inspected |
+| [Setup LAN Transport](frmtransportlanout.md) | TfrmTransportLANOut | Forms/Transports/frmTransportLANOut.dfm | 18 | Not inspected |
+| [Setup MSMQ In Transport](frmtransportmsmqin.md) | TfrmTransportMSMQIn | Forms/Transports/frmTransportMSMQIn.dfm | 27 | Not inspected |
+| [Setup MSMQ Out Transport](frmtransportmsmqout.md) | TfrmTransportMSMQOut | Forms/Transports/frmTransportMSMQOut.dfm | 27 | Not inspected |
+| [Setup POP Transport](frmtransportpop.md) | TfrmTransportPOP | Forms/Transports/frmTransportPOP.dfm | 30 | Not inspected |
+| [Setup SFTP Transport](frmtransportsftpin.md) | TfrmTransportSFTPIn | Forms/Transports/frmTransportSFTPIn.dfm | 40 | Not inspected |
+| [Setup SFTP Transport](frmtransportsftpout.md) | TfrmTransportSFTPOut | Forms/Transports/frmTransportSFTPOut.dfm | 43 | Not inspected |
+| [Setup SMTP Transport](frmtransportsmtp.md) | TfrmTransportSMTP | Forms/Transports/frmTransportSMTP.dfm | 31 | Not inspected |

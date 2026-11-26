@@ -74,7 +74,7 @@ end;
 
 
 <!-- BEGIN VELOX UIA REFERENCE -->
-## Velox computer use (Velox-uai)
+## Velox computer use
 
 Before operating Velox Designer, read [the UI accessibility reference](velox-uia/index.md), then find the relevant form in [the form index](velox-uia/forms.md). Read only the relevant pages. This is source-derived guidance, not a live accessibility snapshot. Confirm the database and Production/Test environment, and use current UI observations for element indexes, visibility, enabled state and action results. Never treat Delphi component names as AutomationIds or reuse saved runtime indexes.
 <!-- END VELOX UIA REFERENCE -->

@@ -12,7 +12,7 @@ public_export: velox-uia
 
 # Select Schema Root Node
 
-Read [Using this reference](index.md) before operating Velox. This page is source-derived and has not been checked against a running build.
+Read [Using this reference](index.md) before operating Velox. This table is source-derived. This form has not been inspected in the recorded runtime check; see [coverage and limits](runtime-checks.md#coverage-and-limits).
 
 - Form: `TXMLSchemaItemSelect`; base: [TfrmBaseViewForm](frmbaseviewform.md).
 - Source: `Forms/frmXMLSchemaItemSelect.dfm` and `Forms/frmXMLSchemaItemSelect.pas`.
@@ -23,7 +23,9 @@ Read [Using this reference](index.md) before operating Velox. This page is sourc
 
 Names below distinguish explicit automation names, labels referenced by NamedBy and DFM captions. These are source clues, not a guarantee of the runtime accessible name or supported UIA patterns. Inherited metadata is merged; descendant assignments override ancestor assignments.
 
-| AutomationId | Name or caption evidence | Component / class | Container / DFM state | Description | Source evidence |
+Editable child providers can expose a source base ID with an `.Input` suffix; see the [observed provider behaviour](runtime-checks.md#common-runtime-differences). Use the live tree rather than assuming every source ID is the actionable element.
+
+| Source AutomationId | Name or caption evidence | Component / class | Container / DFM state | Description | Source evidence |
 |---|---|---|---|---|---|
 | XMLSchemaItemSelect.cxButton1 | Observe live | cxButton1 / TcxButton | Select Schema Root Node | Perform OK in Select Schema Root Node. | Forms/frmXMLSchemaItemSelect.pas:156 |
 | XMLSchemaItemSelect.cxButton2 | Observe live | cxButton2 / TcxButton | Select Schema Root Node | Perform Cancel in Select Schema Root Node. | Forms/frmXMLSchemaItemSelect.pas:159 |

@@ -12,13 +12,13 @@ public_export: velox-uia
 
 This reference gives computer-use agents a map of Velox Designer forms before they inspect the application. Start with the [form index](forms.md), search by form caption or task, then read the relevant form page. Do not load the entire folder into context for every task.
 
-The authority is the Delphi source in the `velox` repository. This first version extracts text DFM controls and explicit Pascal automation assignments, including inherited controls, adapter attachments and tab metadata. It has **not been verified against a running executable**. Source fingerprints on each page identify the working-tree files used; the installed version may differ. No Velox executable was built to produce this reference.
+The authority is the Delphi source in the `velox` repository. The form tables extract text DFM controls and explicit Pascal automation assignments, including inherited controls, adapter attachments and tab metadata. [Runtime checks](runtime-checks.md) now record selected states in ten forms against Designer 310.9826.35233 (Nov 26), 64-bit, inspected on 26 November 2026. Other forms and uninspected states remain source-only. Source fingerprints on each page identify the working-tree files used; the installed version may differ. No Velox executable was built to produce or check this reference.
 
 ## Before each task
 
 1. Identify the required form and expected controls from this folder.
 2. Inspect the running Velox window to confirm the configuration database, Production or Test environment, open module and any modal dialog.
-3. Match the observed accessible names and AutomationIds against the source clues where the tool exposes them. Use only current observations for element indexes, handles and coordinates.
+3. Read any linked runtime observations for the form, then match the observed accessible names and AutomationIds against the source clues. Editable inner providers can expose a base ID with an `.Input` suffix. Use only current observations for element indexes, handles and coordinates.
 4. Check current visibility, enabled state and values. DFM states are defaults, not live facts. Select the appropriate tab or expand a tree branch before looking for its children.
 5. Perform the intended action and observe the result. Refresh accessibility information whenever the visible element tree may have changed.
 
@@ -44,12 +44,13 @@ Navigation row IDs are built at runtime from the tree prefix and node identity. 
 ## Reading form pages
 
 - **Explicit automation metadata** comes from `InitialiseAutomation`, adapter configuration, tab assignments and DFM automation properties. Descendant assignments override inherited assignments for the same component.
+- **Source AutomationId** is the configured base ID. The live editable child may carry an `.Input` suffix, and list adapters may appear as a group containing a native list. See [common runtime differences](runtime-checks.md#common-runtime-differences). Do not append the suffix to every control.
 - **Name** is an explicit automation name. **NamedBy** identifies a label used for naming. **Caption** is a design-time caption that may inform the runtime name. They are intentionally distinguished.
 - **Other controls and commands** lists DFM clues where no explicit metadata was extracted. A Delphi component name is not evidence of an AutomationId.
 - **Container / DFM state** helps locate tabs and groups. A parent can hide or disable a child even when the child has no such flag in the table.
 - **Source evidence** uses repository-relative file paths and line numbers. Source files are not included in the public export. Line numbers can move; use the component and method names when investigating a newer source revision.
 
-Descriptions are copied from source metadata. Generic wording such as “Perform Save” is not a full description of validation, persistence or other side effects. Runtime-created controls, grid rows, list items, popup entries, editor values and provider-supported UIA patterns require live inspection. Custom controls without useful accessible children may require the computer-use tool's visual interaction path. No runtime accessibility coverage or reliability is claimed by this inventory.
+Descriptions are copied from source metadata. Generic wording such as “Perform Save” is not a full description of validation, persistence or other side effects. Runtime-created controls, grid rows, list items, popup entries, editor values and provider-supported UIA patterns require live inspection. Custom controls without useful accessible children may require the computer-use tool's visual interaction path. The [runtime report](runtime-checks.md) states the actual inspection coverage and tool recovery observations; the inventory is not an accessibility certification.
 
 ## Maintenance and publication
 
@@ -60,7 +61,7 @@ cd C:\_GIT\Velox\velox-kb
 npm.cmd run uia:generate
 ```
 
-The generator reads the sibling `velox/Forms` folder by default. An alternative checkout can be supplied with `node Scripts/VeloxPKB/generate-uia.mjs --source <checkout-path>`. It records source hashes, omits values such as Text, Lines, connection strings and credentials, and removes only obsolete generated form pages. Review captions, hints and descriptions before publishing source changes; these fields must remain free of secrets and customer data.
+The generator reads the sibling `velox/Forms` folder by default. An alternative checkout can be supplied with `node Scripts/VeloxPKB/generate-uia.mjs --source <checkout-path>`. It records source hashes, omits values such as Text, Lines, connection strings and credentials, and removes only obsolete generated form pages. It preserves the hand-maintained `runtime-checks.md`, links checked forms to that report and marks other forms as uninspected. Source regeneration does not repeat or extend the runtime checks. Review captions, hints and descriptions before publishing source changes; these fields must remain free of secrets and customer data.
 
 The PKB build regenerates the reference when the sibling source checkout is present. Without source, it builds the checked-in reference. After a successful PKB build, the exporter updates the sibling `velox-ai-info/velox-uia/` folder if that repository exists. It also updates the computer-use pointer in that repository's root `AGENTS.md`. This local copy does not commit or push.
 
